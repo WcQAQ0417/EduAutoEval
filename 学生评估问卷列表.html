@@ -1,0 +1,5954 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index -->
+<html data-immersive-translate-page-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+
+	<title>学生评估问卷列表</title>
+	<link rel="shortcut icon" href="https://jws.qgxy.cn/img/icon/favicon.ico" type="image/x-icon">
+	<meta name="description" content="overview &amp; stats">
+	
+	<!-- bootstrap & fontawesome -->
+	<!--     <link rel="stylesheet" type="text/css" href="/static/template.css"/> -->
+
+	<link rel="stylesheet" href="./学生评估问卷列表_files/bootstrap.min.css">
+
+
+
+
+	<link rel="stylesheet" href="./学生评估问卷列表_files/font-awesome.min.css">
+
+	<!-- page specific plugin styles -->
+	<link rel="stylesheet" href="./学生评估问卷列表_files/jquery-ui.min.css" type="text/css">
+	
+	<link rel="stylesheet" href="./学生评估问卷列表_files/chosen.css">
+	
+	
+	
+	<!-- page specific plugin styles -->
+
+	<!-- jquery ui grid -->
+	
+	<!-- jquery ui grid -->
+
+	<!-- text fonts -->
+	
+	<link rel="stylesheet" href="./学生评估问卷列表_files/fonts-woff2.css">
+
+	<!-- ace styles -->
+	<link rel="stylesheet" href="./学生评估问卷列表_files/ace.min.css" id="main-ace-style">
+
+	<!--[if lte IE 9]>
+	<link rel="stylesheet" href="/assets/css/ace-part2.min.css"/>
+	<![endif]-->
+	
+	
+
+	<!--[if lte IE 9]>
+	<link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
+	<![endif]-->
+
+	<!-- inline styles related to this page -->
+
+	<!-- ace settings handler -->
+	<script src="./学生评估问卷列表_files/ace-extra.min.js"></script>
+
+	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+	<!--[if lte IE 8]>
+	<script src="/assets/js/html5shiv.min.js"></script>
+	<script src="/assets/js/respond.min.js"></script>
+	<![endif]-->
+	<!-- basic scripts -->
+
+	<!--[if !IE]> -->
+	<script src="./学生评估问卷列表_files/jquery-3.4.1.min.js"></script>
+	<script src="./学生评估问卷列表_files/jquery-migrate-3.1.0.min.js"></script>
+	<!-- <![endif]-->
+
+	<!--[if IE]>
+	<script src="/js/jQuery/jquery-3.4.1.min.js"></script>
+	<script src="/js/jQuery/jquery-migrate-1.4.1.min.js"></script>
+	<![endif]-->
+
+	<script type="text/javascript">
+		if ('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+	</script>
+
+
+	<!-- page specific plugin scripts -->
+	<script type="text/javascript">
+		$.ajaxPrefilter(function (s) {
+			if (s.crossDomain) {
+				s.contents.javascript = false;
+			}
+		});
+	</script>
+
+	<!--[if lte IE 8]>
+	<script src="/assets/js/excanvas.min.js"></script>
+	<![endif]-->
+
+	
+	<script type="text/javascript" src="./学生评估问卷列表_files/WdatePicker.js"></script><link href="./学生评估问卷列表_files/WdatePicker.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="./学生评估问卷列表_files/chosen.jquery.min.js"></script>
+
+	<!-- ace scripts -->
+	<script src="./学生评估问卷列表_files/ace-elements.min.js"></script>
+	<script src="./学生评估问卷列表_files/ace.min.js"></script>
+
+	
+
+	<script type="text/javascript" src="./学生评估问卷列表_files/jquery.cookie.js"></script>
+
+	<!-- jqgrid -->
+	
+	<!-- jqgrid -->
+
+	<!-- commoncss -->
+	<link rel="stylesheet" href="./学生评估问卷列表_files/commoncss.css" type="text/css">
+	<!-- commoncss -->
+
+	<!-- alert -->
+	<script type="text/javascript" src="./学生评估问卷列表_files/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="./学生评估问卷列表_files/pagination.js"></script>
+	<script type="text/javascript" src="./学生评估问卷列表_files/urpalert.js"></script>
+	<script type="text/javascript" src="./学生评估问卷列表_files/layer.js"></script><link rel="stylesheet" href="./学生评估问卷列表_files/layer.css" id="layui_layer_skinlayercss" style="">
+
+	<script src="./学生评估问卷列表_files/bootstrap.min.js"></script>
+	<!-- alert -->
+
+	<!-- light bootstrap 两个图表-->
+	
+	<!-- light bootstrap 两个图表-->
+	
+    
+    
+    
+    <link rel="stylesheet" href="./学生评估问卷列表_files/kcbcolor.css" type="text/css">
+    <script type="text/javascript" src="./学生评估问卷列表_files/kcbcolor.js"></script>
+    <script type="text/javascript" src="./学生评估问卷列表_files/coursetable.js"></script>
+    <script type="text/javascript">
+
+
+        /*问卷编码，问卷名称，被评估人编号，被评估人姓名，评估内容号，评估内容*/
+        $("#left").css("height", $("#right").height());
+        /* 烟台大学使用*/
+        function evaluationByytdx(questionnaireCode, questionnaireName,
+                            evaluatedPeopleNumber, evaluatedPeople, evaluationContentNumber,note
+                           ) {
+
+            //根据问卷编码判断问卷是否为在线课程
+            var zxkc = "0";
+            $.ajax({
+                url: "/student/teachingEvaluation/teachingEvaluation/judgeOnlinecourses",
+                cache: false,
+                type: "post",
+                data: "questionnaireCode="+questionnaireCode,
+                success: function (d) {
+
+                    if( d != null && d != "" ){
+                        zxkc = d;
+                    }
+
+                    //如果为0则不是在线课程,不需要填写
+                    if(zxkc == "0"){
+                    
+                    	
+                        window.document.WjList.evaluatedPeople.value = evaluatedPeople;
+
+                        window.document.WjList.evaluatedPeopleNumber.value = evaluatedPeopleNumber;
+
+                        window.document.WjList.questionnaireCode.value = questionnaireCode;
+
+                        window.document.WjList.questionnaireName.value = questionnaireName;
+
+                        window.document.WjList.evaluationContentNumber.value = evaluationContentNumber;
+
+                        window.document.WjList.submit();
+                    }else {
+                        //学生已经填写在线课程
+                        if (note == '是') {
+
+                            window.document.WjList.evaluatedPeople.value = evaluatedPeople;
+
+                            window.document.WjList.evaluatedPeopleNumber.value = evaluatedPeopleNumber;
+
+                            window.document.WjList.questionnaireCode.value = questionnaireCode;
+
+                            window.document.WjList.questionnaireName.value = questionnaireName;
+
+                            window.document.WjList.evaluationContentNumber.value = evaluationContentNumber;
+
+                            window.document.WjList.submit();
+                        } else {
+                            var rad = "<div class='row' ><div class='col-xs-12'>"
+                                    + '<div class="profile-info-row"><div class="profile-info-name" align="center">'
+                                    + '<input type="radio" name="sfzxkc" value="是" >&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sfzxkc" checked="checked" value="否">&nbsp;否</div></div>';
+
+                            layer.confirm(rad, {
+                                title: '是否在线课程',
+                                btnAlign: 'c',
+                                btn: ['<i class="ace-icon fa fa-floppy-o bigger-50"></i> 确定', '<i class="ace-icon fa fa-ban bigger-50"></i> 关闭'] //按钮
+                            }, function () {
+                                var sfzxkc = $("input[name='sfzxkc']:checked").val();
+                                $.ajax({
+                                    url: "/student/teachingEvaluation/teachingEvaluation/savesfzxkc",
+                                    type: "post",
+                                    data: "sfzxkc=" + sfzxkc + "&questionnaireCode=" + questionnaireCode
+                                    + "&questionnaireName=" + questionnaireName + "&evaluatedPeopleNumber="
+                                    + evaluatedPeopleNumber + "&evaluatedPeople=" + evaluatedPeople + "&evaluationContentNumber=" + evaluationContentNumber,
+                                    dataType: "json",
+                                    beforeSend: function () {
+                                        $("#loading-btn").attr("data-loading-text",
+                                                "正在处理...");
+                                        $("#loading-btn").button('loading');
+                                    },
+                                    complete: function () {
+                                        $("#loading-btn").removeAttr(
+                                                "data-loading-text");
+                                        $("#loading-btn").button('reset');
+                                    },
+                                    success: function (data) {
+                                        if (sfzxkc == '否') {
+                                            layer.closeAll();
+                                        } else {
+                                            if (data["result"] == "ok") {
+                                                layer.closeAll();
+                                                window.document.WjList.evaluatedPeople.value = evaluatedPeople;
+
+                                                window.document.WjList.evaluatedPeopleNumber.value = evaluatedPeopleNumber;
+
+                                                window.document.WjList.questionnaireCode.value = questionnaireCode;
+
+                                                window.document.WjList.questionnaireName.value = questionnaireName;
+
+                                                window.document.WjList.evaluationContentNumber.value = evaluationContentNumber;
+
+                                                window.document.WjList.submit();
+                                            }
+                                        }
+                                    },
+                                    error: function () {
+                                        urp.alert("操作失败！");
+                                    }
+                                });
+                            });
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    urp.alert("错误代码[" + xhr.readyState + "-" + xhr.status + "]:获取数据失败！");
+                }
+            });
+        }
+        
+        
+        function editEvaluationResult(questionnaireCode, questionnaireName,
+                                  evaluatedPeopleNumber, evaluatedPeople, evaluationContentNumber,coureSequenceNumber){
+        	$("#evaluatedPeople").val(evaluatedPeople);
+			$("#evaluatedPeopleNumber").val(evaluatedPeopleNumber);
+			$("#questionnaireCode").val(questionnaireCode);
+			$("#questionnaireName").val(questionnaireName);
+			$("#evaluationContentNumber").val(evaluationContentNumber);
+			document.zgnyEvaluationCover.submit();
+        }
+
+
+        function evaluation(questionnaireCode, questionnaireName,
+                                  evaluatedPeopleNumber, evaluatedPeople, evaluationContentNumber,coureSequenceNumber) {
+                window.document.WjList.evaluatedPeople.value = evaluatedPeople;
+
+                window.document.WjList.evaluatedPeopleNumber.value = evaluatedPeopleNumber;
+
+                window.document.WjList.questionnaireCode.value = questionnaireCode;
+
+                window.document.WjList.questionnaireName.value = questionnaireName;
+
+                window.document.WjList.evaluationContentNumber.value = evaluationContentNumber;
+
+                window.document.WjList.coureSequenceNumber.value = coureSequenceNumber;
+
+                window.document.WjList.submit();
+        }
+
+
+
+
+
+        function evaluationResult(questionnaireCode, questionnaireName,
+                                  evaluatedPeopleNumber, evaluatedPeople, evaluationContentNumber) {
+                                  
+            /* window.document.WjList.evaluatedPeople.value = evaluatedPeople;
+
+             window.document.WjList.evaluatedPeopleNumber.value = evaluatedPeopleNumber;
+
+             window.document.WjList.questionnaireCode.value = questionnaireCode;
+
+             window.document.WjList.questionnaireName.value = questionnaireName;
+
+             window.document.WjList.evaluationContentNumber.value = evaluationContentNumber;
+
+             window.document.WjList.evaluationContentContent.value = evaluationContentContent;
+
+             window.document.WjList.action = "/student/teachingEvaluation/teachingEvaluation/evaluationReusltPage";
+
+             window.document.WjList.submit(); */
+			if(false){
+				$("#evaluatedPeople").val(evaluatedPeople);
+				$("#evaluatedPeopleNumber").val(evaluatedPeopleNumber);
+				$("#questionnaireCode").val(questionnaireCode);
+				$("#questionnaireName").val(questionnaireName);
+				$("#evaluationContentNumber").val(evaluationContentNumber);
+				document.zgnyEvaluationCover.submit();
+
+			}else{
+	            var url = "/student/teachingEvaluation/teachingEvaluation/evaluationReusltPage";
+	            $.ajax({
+	                url: url,
+	                cache: false,
+	                type: "post",
+	                data: "evaluatedPeople=" + evaluatedPeople +
+	                "&evaluatedPeopleNumber=" + evaluatedPeopleNumber +
+	                "&questionnaireCode=" + questionnaireCode +
+	                "&questionnaireName=" + questionnaireName +
+	                "&evaluationContentNumber=" + evaluationContentNumber,
+	                dataType: "json",
+	                success: function (d) {
+	                    //var dataValue = JSON.stringify(d);
+	                    //alert(dataValue);
+	                    divView(d);
+	                    //
+	                },
+	                error: function (xhr) {
+	                    urp.alert("错误代码[" + xhr.readyState + "-" + xhr.status + "]:获取数据失败！");
+	                }
+	            });
+			}
+
+        }
+
+        //侧边栏
+        function divView(d) {
+            var tcont = "";
+        	$("#div_title_show").html("<h3>"+d['questionnaireName']+"</h3>");
+            tcont += "<div class='profile-user-info profile-user-info-striped self'>";
+            tcont += "<div class='profile-info-row'><div class='profile-info-name'> 被评人 </div>";
+            tcont += "<div class='profile-info-value'><span class='value_element'>" + d['evaluatedPeople'] + "</span></div>";
+            tcont += "<div class='profile-info-name'> 评估内容 </div>";
+            tcont += "<div class='profile-info-value'><span class='value_element'>" + d['evaluationContentContent'] + "</span></div></div></div><br>";
+            //$("#div-title_show").val("<h3>"+d['questionnaireName']+"</h3>");
+            var data = d["data"];
+            tcont += "<table class='table-box' style='border: 1px solid #e6e6e6;width:100%;'><tbody>";
+			var stxh = "ABCDEFGHIJK";
+            if (data != null) {
+                $.each(data, function (i, pageDate) {
+                    tcont += "<tr style='border-top: 1px solid #e6e6e6;'>";
+                    tcont += "<td rowspan= '" + pageDate.questionsList.length * 2 + "' style='text-align: center; border: 1px solid #e6e6e6;width:3%;background-color: #EDF3F4;font-size: 16px;'>" + pageDate.questionsCourseName + "</td>";
+                	 $.each(pageDate.questionsList, function (j, pageValue) {
+                	 	var tableId = j + 1;
+                	 	tcont += "<td style='width:98%;font-size: 15px;'>"+tableId+"、" + pageValue.questionsTopic.questionsName +"</td>";
+                	 	tcont += "</tr><tr><td style='width:98%;'>";
+                	 	if(pageValue.answerList != null && pageValue.answerList.length > 0){
+                	 		$.each(pageValue.answerList, function (k, answer) {
+                	 			 $.each(d["selectedAnswerList"], function (m, selectedAnswer) {
+                    	 			if(false && pageValue.id.questionsCode == '0000000044'){
+                    	 				tcont +='<div class="radio-bj" style="width: 150px;">'+answer.answerName+selectedAnswer.answer+'</div>';
+                        	 		}else{
+	                	 			 	if(pageValue.id.questionsCode == selectedAnswer.id.questionsCode){
+	                	 			 		tcont += "<div class='radio-bj' style='width: 100%^;margin: 4px 0;'><label>";
+	                	 			 		if(pageValue.questionsCourseType.integrationType == "01"){
+	                	 			 			if(answer.id.answerCode == selectedAnswer.answer){
+	                	 			 				tcont += "<span style='margin-left: 10px;'>" + stxh.substring(k, k + 1) +" <font color='blue'>" + answer.answerName + "</font> </span>";
+	                	 			 			}
+	                	 			 			if(answer.id.answerCode != selectedAnswer.answer){
+	                	 			 				tcont += "<span style='margin-left: 10px;'>" + stxh.substring(k, k + 1) + " " + answer.answerName + "</span>";
+	                	 			 			}
+	                	 			 		}
+	                	 			 		if(pageValue.questionsCourseType.integrationType != "01" && pageValue.questionsCourseType.integrationType != "04"){
+	                	 			 			var da_value = pageValue.questionsUnit + "_" + answer.scoresScale;
+	                                            if (da_value == selectedAnswer.answer) {
+	                                                tcont += "<span style='margin-left: 10px;'>" + stxh.substring(k, k + 1)+ " <font color='blue'>" + answer.answerName + "</font></span>";
+	                                            }
+	                                            if (da_value != selectedAnswer.answer) {
+	                                                tcont += "<span style='margin-left: 10px;'>" + stxh.substring(k, k + 1) + " " + answer.answerName + "</span>";
+	                                            }
+	                	 			 		}
+	                	 			 		tcont += "</label></div>";
+	                	 			 		
+	                	 			 	}
+                        	 		}
+                        	 		
+                    	 			 if(false){
+         		         				tcont += "</br><div style='background:#A9C8F1;'>&nbsp;<font color='#FF0000'>温馨提示：为了规范评教，请大家遵循以下原则：</font> <br>";
+         		         				tcont += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='#000099'>1、评价结果为百分制分值，原则不能评100分；<BR>";
+         		         				tcont += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、分值可以带一位小数，评分相同的课程不能超过2门；<BR>";
+         		         				tcont += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、五门课程以上的评分应相差5分以上；<BR>";
+         		         				tcont += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	4、各课程的主观评价不用相同。<br>";
+         		         				tcont += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5、<font color='#FF0000'>“黄金无足色，白璧有微瑕”。</font><font color='#000000'>你的评价会影响任课教师切身利益，所以请你务必认真对待。</font></font><br>";
+         		         				tcont += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教务处教学质量管理科和各学院教学办会随时检查评价情况，对于不符合要求的评价，一律退回重评处理。</font></div>";
+         		        	 		}
+                    	 			
+                	 			 });
+                	 		});
+                	 	}else{
+                	 		$.each(d["selectedAnswerList"], function (a, l) {
+                                if (pageValue.id.questionsCode == l.id.questionsCode) {
+                                    tcont += "<span style='margin-left: 10px;'>" + l.answer + "</span>";
+                                }
+                            });
+                	 	}
+	                    tcont += "</td></tr>";
+                	 });
+                });
+            }else{
+            	tcont += "<td width='1%'><table class='table-box' height='100%'><tbody><tr height='100%'><td width='1%' "
+            		 + "style='text-align: center; vertical-align: middle;'>无评估信息</td></tr></tbody></table></td>";
+            }
+            tcont += "</tr><tr>";
+            tcont += "<td colspan='2'><div class='div-title'><h3>主观评价";
+            if(d['bz'] != '' && d['bz'] != undefined && d['bz'] != null){
+            	tcont += "（" +d['bz']+ "）";
+            }
+            tcont += "：";
+            tcont += "</h3></div></td></tr><tr><td colspan='2'>";
+            tcont += "<div><textarea class='form-control' name='zgpj' readonly='readonly'>" + d['subjectiveResult'] + "</textarea></div></td>";
+            tcont += "</tr></tbody></table>";
+            $("#pgtbody").html(tcont);
+            $("#curriculumInfo-divcon").animate({width: '70%'});
+        }
+
+        //设置点击空白的关闭div
+        $(function () {
+            $("#curriculumInfo-divcon").click(function () {
+                return false;
+            });
+            $(document).click(function (e) {
+                var id = $(e.target).attr("id");
+                if (id == "td_div") {
+
+                } else {
+                    $('#curriculumInfo-divcon').animate({width: '0px'});
+                }
+            })
+        });
+
+		var optType = "";
+
+        $(function () {
+        	var schoolId=$("#schoolId").val();
+        	
+        	if(schoolId != "100027"){
+	        	if (true) {
+	                getJxpgList(1, 10, true);
+	            }
+        	}else{//烟台大学特殊处理（点击同意承诺书之后才加载数据）
+        		/* if (true) {
+	        		if(optType == "agree"){
+	        			getJxpgList(1, 10, true);
+	        		}
+	        	} */
+        	}
+            
+        });
+        
+        
+
+		
+        function getJxpgList(page, pageSize, conditionChanged) {
+            if (conditionChanged) {
+                pageConditions = $(document.kckbform).serialize();
+            }
+            $.ajax({
+                url: "/student/teachingEvaluation/teachingEvaluation/search",
+                cache: false,
+                type: "post",
+                data : "optType=" + page + "&pageSize=" + pageSize,
+                dataType: "json",
+                success: function (d) {
+                    //urp.pagebar("urppagebar",pageSize,page,d["data"]["pageContext"].totalCount,getJxpgList);
+                    fillTable(d);
+                },
+                error: function (xhr) {
+                    urp.alert("错误代码[" + xhr.readyState + "-" + xhr.status + "]:获取数据失败！");
+                }
+            });
+        }
+
+        function fillTable(data) {
+
+            $("#totalkc").text(data["evaluationNum"]);
+            $("#wpgkc").text(data["notFinishedNum"]);
+            if (data.data.length > 0) {
+                $("#page_div").removeAttr("display");
+                var tcont = "";
+                //console.log(data["data"]);
+                var count = data["data"].length;
+                $("#count").val(count);
+                $.each(data["data"], function (i, v) {
+                    tcont += "<tr>";
+                    if (v.isEvaluated == "是") {
+                    	tcont += "<td><button class='btn btn-info btn-round btn-xs'" + /*问卷编码，问卷名称，被评估人编号，被评估人姓名，评估内容号，评估内容*/
+                                "onclick='evaluationResult(\"" + v.id.questionnaireCoding + "\",\"" + v.questionnaire.questionnaireName + "\",\"" + v.id.evaluatedPeople + "\",\"" + v.evaluatedPeople + "\",\"" + v.id.evaluationContentNumber +"\");return false;'>" +
+                                "<i class='ace-icon fa fa-eye'></i>查看" +
+                                "</button></td>";
+                        
+                        /* if(false){
+	                        if(parseInt(v.whflyCnt) > 0){
+	                        	tcont += "&nbsp;&nbsp;<button class='btn btn-xs btn-round btn-info'" +
+	                                    "onclick='lyhd(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\",\"" + $.trim(v.id.coureSequenceNumber) +  "\");return false;'>" +
+	                                    "<i class='ace-icon fa fa-comments'></i>&nbsp;留言互动&nbsp;<span class='badge badge-danger'>" + v.whflyCnt + "</span>" +
+	                                    "</button>";
+	                        }else{
+	                        	tcont += "&nbsp;&nbsp;<button class='btn btn-xs btn-round btn-info'" +
+	                                    "onclick='lyhd(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\",\"" + $.trim(v.id.coureSequenceNumber) +  "\");return false;'>" +
+	                                    "<i class='ace-icon fa fa-comments'></i>&nbsp;留言互动 " + 
+	                                    "</button>";
+	                        }
+                        } */
+                        
+                        
+                    } else {
+                        if(false) {
+                        	if(parseInt(v.cnt) > 0){
+                        		tcont += "<td><button class='btn btn-success btn-round btn-xs'" + 
+	                                "onclick='editEvaluationResult(\"" + v.id.questionnaireCoding + "\",\"" + v.questionnaire.questionnaireName + "\",\"" + v.id.evaluatedPeople + "\",\"" + v.evaluatedPeople + "\",\"" + v.id.evaluationContentNumber +"\");return false;'>" +
+	                                "<i class='ace-icon fa fa-pencil-square-o bigger-120'></i>修改" +
+	                                "</button>&nbsp;&nbsp;</td>";
+                        	}else{
+                        		tcont += "<td><button class='btn btn-xs btn-round btn-purple'" +
+	                                "onclick='evaluationByytdx(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) + "\",\"" +$.trim(v.note)+  "\");return false;'>" +
+	                                "<i class='ace-icon fa fa-edit'></i>评估" +
+	                                "</button></td>";
+                        	}
+                        	
+                        }else if(false){
+                            tcont += "<td><button class='btn btn-xs btn-round btn-purple'" +
+                                    "onclick='evaluation(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\");return false;'>" +
+                                    "<i class='ace-icon fa fa-edit'></i>评估" +
+                                    "</button>  ";
+                            tcont += "<button class='btn btn-xs btn-round btn-purple'" +
+                                    "onclick='notevaluation(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\");return false;'><i class='ace-icon fa fa-edit'></i>申请不评</button></td>";
+
+                        }else if(false){//河海大学留言互动功能定制
+                            
+                            tcont += "<td><button class='btn btn-xs btn-round btn-purple'" +
+                                    "onclick='evaluation(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\",\"" + $.trim(v.id.coureSequenceNumber) +  "\");return false;'>" +
+                                    "<i class='ace-icon fa fa-edit'></i>&nbsp;评估" +
+                                    "</button>";
+                            /* if(parseInt(v.whflyCnt) > 0){
+                            	tcont += "&nbsp;&nbsp;<button class='btn btn-xs btn-round btn-info'" +
+                                    "onclick='lyhd(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\",\"" + $.trim(v.id.coureSequenceNumber) +  "\");return false;'>" +
+                                    "<i class='ace-icon fa fa-comments'></i>&nbsp;留言互动&nbsp;<span class='badge badge-danger'>" + v.whflyCnt + "</span>" +
+                                    "</button></td>";
+                            }else{
+                            	tcont += "&nbsp;&nbsp;<button class='btn btn-xs btn-round btn-info'" +
+                                    "onclick='lyhd(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) +  "\",\"" + $.trim(v.id.coureSequenceNumber) +  "\");return false;'>" +
+                                    "<i class='ace-icon fa fa-comments'></i>&nbsp;留言互动" +
+                                    "</button></td>";
+                            } */
+                            
+                        }else{
+                            tcont += "<td><button class='btn btn-xs btn-round btn-purple'" +
+                                    "onclick='evaluation(\"" + $.trim(v.id.questionnaireCoding) + "\",\"" + $.trim(v.questionnaire.questionnaireName) + "\",\"" + $.trim(v.id.evaluatedPeople) + "\",\"" + $.trim(v.evaluatedPeople) + "\",\"" + $.trim(v.id.evaluationContentNumber) + "\",\"" + $.trim(v.id.coureSequenceNumber) + "\");return false;'>" +
+                                    "<i class='ace-icon fa fa-edit'></i>评估" +
+                                    "</button></td>";
+                        }
+                    }
+                    tcont += "<td>" + v.questionnaire.questionnaireName + "</td>";
+                    tcont += "<td>" + v.evaluatedPeople + "</td>";
+                    tcont += "<td>" + v.evaluationContent + "</td>";
+                  /*  */
+                    tcont += "<td>";
+                    if(v.isEvaluated == "是"){
+                        tcont += " <span class='label label-success arrowed'>"+v.isEvaluated+"</span>";
+                    }else{
+                        tcont += " <span class='label label-light arrowed'>"+v.isEvaluated+"</span>";
+                    }
+                    tcont += "</td>";
+
+                    tcont += "</tr>";
+                });
+                $("#jxpgtbody").html(tcont);
+            } else {
+                var svg = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="170px" height="170px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" p-id="422"><g p-id="423"><path fill="#EEEEEE" d="M18.224,35.559c0,0,0.38-0.042,0.592,0.211s0.465,3.804,1.395,4.776s4.692,0.423,4.692,1.691\
+					c0,1.014-3.496,1.124-4.68,2.096c-1.184,0.972-0.507,5.072-1.957,4.921c-1.135-0.119-0.338-3.381-1.733-4.692\
+					s-4.776-1.057-4.776-2.24s3.466-0.465,4.65-1.818C17.59,39.152,17.083,35.559,18.224,35.559z" p-id="424"></path><path fill="#B1AFAE" d="M7.726,77.11c0,0,0.23-0.026,0.357,0.128c0.128,0.153,0.281,2.296,0.842,2.883s2.832,0.255,2.832,1.02\
+					c0,0.612-2.11,0.678-2.824,1.265c-0.714,0.587-0.306,3.061-1.181,2.97c-0.685-0.072-0.204-2.041-1.046-2.832\
+					c-0.842-0.791-2.883-0.638-2.883-1.352s2.092-0.281,2.806-1.097C7.343,79.279,7.037,77.11,7.726,77.11z" p-id="425"></path><path fill="#EEEEEE" d="M190.447,56.933c0,0,0.261-0.029,0.406,0.145s0.319,2.608,0.956,3.274c0.637,0.666,3.216,0.29,3.216,1.159\
+					c0,0.695-2.396,0.77-3.208,1.437c-0.811,0.666-0.348,3.477-1.341,3.373c-0.778-0.081-0.232-2.318-1.188-3.216\
+					c-0.956-0.898-3.274-0.724-3.274-1.536s2.376-0.319,3.187-1.246C190.013,59.396,189.665,56.933,190.447,56.933z" p-id="426"></path><path fill="#B1AFAE" d="M154.66,25.617c0,0,0.261-0.029,0.406,0.145c0.145,0.174,0.319,2.608,0.956,3.274\
+					c0.637,0.666,3.216,0.29,3.216,1.159c0,0.695-2.396,0.77-3.208,1.437c-0.811,0.666-0.348,3.477-1.341,3.373\
+					c-0.778-0.081-0.232-2.318-1.188-3.216c-0.956-0.898-3.274-0.724-3.274-1.536s2.376-0.319,3.187-1.246\
+					C154.226,28.08,153.878,25.617,154.66,25.617z" p-id="427"></path><circle fill="#EEEEEE" cx="56.234" cy="19.989" r="3.79" p-id="428"></circle><circle fill="#EEEEEE" cx="178.362" cy="75.509" r="2.376" p-id="429"></circle></g><circle fill="#EEEEEE" cx="95.662" cy="104.843" r="77.333" p-id="430"></circle><path fill="#FDFDFD" d="M145.856,131.98c-0.023,3.196-2.633,5.769-5.829,5.746l-89.136-0.146c-3.196-0.023-5.769-2.633-5.746-5.829\
+					l0.431-56.782c0.023-3.196,2.633-5.769,5.829-5.746l72.81,0.029c5.893,5.294,13.625,12.765,21.971,19.869L145.856,131.98z" p-id="431"></path><path fill="#D8D8D8" d="M146.469,87.616c-0.026,1.112-0.949,1.992-2.061,1.966l-19.059-0.448c-1.112-0.026-1.992-0.949-1.966-2.061\
+					l0.381-16.217c0.026-1.112,0.949-1.992,2.061-1.966L146.469,87.616z" p-id="432"></path><circle fill="#EEEEEE" cx="117.299" cy="128.428" r="18.247" p-id="433"></circle><path fill="#FFFFFF" d="M117.412,148.245c2.241,0,4.352-0.653,6.209-1.801l-0.006-2.304c0,0-0.31-3.921-3.169-4.83\
+					c-0.044-0.014-0.76,0.77-2.055,0.699l-0.831-0.262c-0.085,0.004-0.178,0.127-0.262,0.131c-0.085-0.004-0.395-0.433-0.481-0.437\
+					l-0.437,0.219c-1.294,0.071-2.054-0.403-2.098-0.389c-2.859,0.909-3.073,4.869-3.073,4.869l-0.006,2.304\
+					C113.06,147.592,115.171,148.245,117.412,148.245z" p-id="434"></path><path fill="#FFFFFF" d="M126.565,131.668c-0.091-4.974-4.313-8.929-9.431-8.836c-5.117,0.094-9.192,4.202-9.1,9.175\
+					c0.059,3.23,1.95,6.365,4.669,8.141l9.773-0.179c2.294-1.693,3.83-4.47,4.06-7.374C126.561,132.288,126.57,131.978,126.565,131.668z\
+					M121.961,139.026l-9.001,0.165c-2.103-1.47-3.536-3.873-3.581-6.347c-0.074-4.03,3.384-7.361,7.723-7.441\
+					c4.339-0.08,7.917,3.123,7.991,7.153C125.137,135.032,123.914,137.482,121.961,139.026z" p-id="435"></path><path fill="#B1AFAE" d="M113.09,139.511l8.674-0.159c1.881-1.543,3.058-3.992,3.013-6.467c-0.074-4.029-3.523-7.233-7.705-7.157\
+					c-4.181,0.077-7.511,3.405-7.437,7.434C109.68,135.636,111.063,138.04,113.09,139.511z" p-id="436"></path><linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="213.0032" y1="105.5631" x2="213.0032" y2="105.5631" gradientTransform="matrix(0.9989 0.0478 -0.0478 0.9989 -99.1255 22.5725)" p-id="437"><stop offset="0.2225" style="stop-color:#FFFFFF" p-id="438"></stop><stop offset="1" style="stop-color:#D1D3D4" p-id="439"></stop></linearGradient><path fill="url(#SVGID_1_)" d="M108.588,138.199" p-id="440"></path><path fill="#B1AFAE" d="M122.101,140.456c-1.196,0.936-3.021,0.947-4.737,0.969c-1.752,0.023-3.397,0.04-4.644-0.756\
+					c-0.398-0.254-0.581-0.843-0.41-0.847l10.184-0.231C122.665,139.587,122.402,140.221,122.101,140.456z" p-id="441"></path><path fill="#C8C7C6" d="M109.59,133.167c-0.074-4.049,3.268-7.393,7.465-7.47c4.197-0.077,7.659,3.143,7.734,7.191\
+					c0.03,1.624-0.464,3.237-1.336,4.592c1.06-1.425,1.672-3.18,1.639-4.947c-0.074-4.049-3.665-7.267-8.02-7.187\
+					c-4.355,0.08-7.826,3.427-7.752,7.477c0.027,1.493,0.558,2.96,1.434,4.214C110.041,135.862,109.615,134.525,109.59,133.167z" p-id="442"></path><path fill="#FFFFFF" d="M122.199,140.266c-1.218,0.535-3.07,0.508-4.805,0.538c-1.771,0.031-3.424,0.109-4.676-0.323\
+					c-0.399-0.138-0.578-0.465-0.406-0.469l10.293-0.234C122.778,139.775,122.506,140.132,122.199,140.266z" p-id="443"></path><linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="221.3779" y1="106.4216" x2="221.3779" y2="106.4216" gradientTransform="matrix(0.9989 0.0478 -0.0478 0.9989 -99.1255 22.5725)" p-id="444"><stop offset="0.2225" style="stop-color:#FFFFFF" p-id="445"></stop><stop offset="1" style="stop-color:#D1D3D4" p-id="446"></stop></linearGradient><path fill="url(#SVGID_2_)" d="M116.912,139.457" p-id="447"></path><path fill="#C1C1C1" d="M122.63,139.791c0,0.241-0.196,0.437-0.437,0.437h-9.617c-0.241,0-0.437-0.196-0.437-0.437l0,0\
+					c0-0.241,0.196-0.437,0.437-0.437h9.617C122.434,139.354,122.63,139.549,122.63,139.791L122.63,139.791z" p-id="448"></path><path fill="#B1AFAE" d="M119.922,145.551c0,0.108-0.088,0.196-0.196,0.196l-4.626,0.003c-0.108,0-0.196-0.088-0.196-0.196\
+					l-0.002-3.131c0-0.108,0.088-0.196,0.196-0.196l4.626-0.003c0.108,0,0.196,0.088,0.196,0.196L119.922,145.551z" p-id="449"></path><path fill="#CCCCCC" d="M119.374,145.166c0,0.082-0.069,0.148-0.153,0.148l-3.616,0.002c-0.085,0-0.154-0.066-0.154-0.148\
+					l-0.001-2.36c0-0.082,0.069-0.148,0.153-0.148l3.616-0.002c0.085,0,0.154,0.066,0.154,0.148L119.374,145.166z" p-id="450"></path><rect x="115.894" y="143.119" fill="#FFFFFF" width="1.315" height="0.527" p-id="451"></rect><rect x="117.613" y="143.118" fill="#FFFFFF" width="1.315" height="0.527" p-id="452"></rect><rect x="115.895" y="144.042" fill="#FFFFFF" width="3.034" height="0.813" p-id="453"></rect><g p-id="454"><path fill="#D8D8D8" d="M111.976,131.974c-0.82-0.543,0.176-2.081,1.023-2.932s1.519-1.188,2.189-1.014\
+					c0.469,0.122,1.102,1.168-0.015,2.077C113.919,131.126,113.369,132.898,111.976,131.974z" p-id="455"></path><circle fill="#D8D8D8" cx="111.865" cy="133.908" r="0.962" p-id="456"></circle></g><path fill="#D8D8D8" d="M112.247,85.099c0,1.057-0.857,1.913-1.913,1.913H59.158c-1.057,0-1.913-0.857-1.913-1.913l0,0\
+					c0-1.057,0.857-1.913,1.913-1.913h51.175C111.39,83.186,112.247,84.042,112.247,85.099L112.247,85.099z" p-id="457"></path><path fill="#D8D8D8" d="M83.201,98.717c0,1.057-0.857,1.913-1.913,1.913H59.158c-1.057,0-1.913-0.857-1.913-1.913l0,0\
+					c0-1.057,0.857-1.913,1.913-1.913h22.129C82.344,96.804,83.201,97.66,83.201,98.717L83.201,98.717z" p-id="458"></path><path fill="#D8D8D8" d="M83.201,112.335c0,1.057-0.857,1.913-1.913,1.913H59.158c-1.057,0-1.913-0.857-1.913-1.913l0,0\
+					c0-1.057,0.857-1.913,1.913-1.913h22.129C82.344,110.422,83.201,111.278,83.201,112.335L83.201,112.335z" p-id="459"></path><path fill="#D8D8D8" d="M141.451,148.653c-0.669-0.798-1.858-0.902-2.656-0.234l-0.003,0.003l-2.983-3.559\
+					c3.835-4.361,6.162-10.08,6.162-16.344c0-13.675-11.086-24.76-24.76-24.76c-13.675,0-24.76,11.086-24.76,24.76\
+					c0,13.675,11.086,24.76,24.76,24.76c5.177,0,9.983-1.59,13.957-4.307l2.876,3.43l-0.003,0.003c-0.798,0.669-0.902,1.858-0.234,2.656\
+					l9.153,10.918c2.63-2.047,5.132-4.249,7.475-6.612L141.451,148.653z M117.149,146.768c-10.078,0-18.247-8.17-18.247-18.248\
+					c0-10.078,8.17-18.247,18.247-18.247c10.078,0,18.248,8.17,18.248,18.247C135.397,138.598,127.227,146.768,117.149,146.768z" p-id="460"></path></svg>';
+                var message = "<div style='text-align: center;'>" + svg + "<br><font>暂时木有内容呀~~</font></div>";
+                $("#mesage_div").html(message);
+                $("#mesage_div").removeAttr("display");
+                $("#page_div").css("display", "none");
+            }
+
+        }
+       $(function () {
+	       var schoolId=$("#schoolId").val();
+	       var isFinished = "";
+	       var infoOff=$("#infoOff").val();
+	       var isFirstVisit = "visited";
+	       var infoTime=$("#infoTime").val();
+	       if(schoolId=="100006"&&infoOff=="1"&&Number(infoTime)>0){
+	         tsxx($("#infoContent").html(), "80%");
+	       }else if(schoolId=="100027" && infoOff == "1"&& Number(infoTime) > 0){
+	       	if(isFinished == "unfinished"){
+	       	  var nowdate = getNowFormatDate();
+	       	  $("#nowDate").html(nowdate);
+	       	  
+	       	  if(isFirstVisit == "unVisit"){
+	       	  	tsxxYtdx($("#infoContent").html(), "80%");
+	       	  }else{
+	       	  	getJxpgList(1, 10, true);
+	       	  }
+	       	}else{
+	       		getJxpgList(1, 10, true);
+	       	}
+	       	 
+	       }
+       });  
+            
+       function tsxx(val, width) {
+         var infoTime=$("#infoTime").val();
+            var mod = addslidersModel("right-menu", width, "right");
+            $(".modal-content").html("<div id='tsDiv' style='border-bottom: 0; padding: 10px; word-break: break-all;'>"
+                    + val + "</div>");
+            $(".modal-dialog").append("<div style='border: 3px solid #6fb3e0; background: #6fb3e0; position: absolute; bottom: 0; width: 100%;' class='center'>\
+				<button class='btn btn-round btn-xs no-border' disabled id='tsxxClose' onclick='$(\"#right-menu\").modal(\"hide\");'>\
+					<i class='fa fa-times'></i> 关闭（"+infoTime+"s）\
+				</button>\
+				</div>");
+            var wHeight = $(window).height();
+           // $(".modal-content").css("top", "30px");
+            $(".modal-content").css("overflow", "auto");
+            $(".modal-content").css("height", wHeight - 120);
+            mod.modal({
+                backdrop: 'static',
+                keyboard: false
+            }).on('hide.bs.modal', function () {
+                $("body").removeClass('modal-open');
+                $("body").css('padding-right', '0px');
+                mod.remove();
+                $('.modal-backdrop').remove();
+                return false;
+            });
+     
+            tt = infoTime;
+            timer = setInterval(function () {
+                //console.log($("#tsxxClose").html());
+                tt--;
+                if (tt == 0) {
+                    $(mod).find("#tsxxClose").html("<i class='fa fa-times'></i> 关闭");
+                    $(mod).find("#tsxxClose").prop("disabled", false);
+                    clearInterval(timer);
+                } else {
+                    $(mod).find("#tsxxClose").html("<i class='fa fa-times'></i> 关闭（" + tt + "s）");
+                }
+            }, 1000);
+        }
+        
+        
+        function tsxxYtdx(val, width) {
+         	var infoTime=$("#infoTime").val();
+            var mod = addslidersModel("right-menu", width, "right");
+            $(".modal-content").html("<div id='tsDiv' style='border-bottom: 0; padding: 10px; word-break: break-all;'>"
+                    + val + "</div>");
+            $(".modal-dialog").append("<div style='border: 3px solid #6fb3e0; background: #6fb3e0; position: absolute; bottom: 0; width: 100%;' class='center'>\
+				<button class='btn btn-purple btn-sm' disabled id='tsxxAgree' onclick='dealOptType(\"agree\");'>\
+					<i class='fa fa-times'></i> 我自愿承诺（"+infoTime+"s）\
+				</button>\
+				<button class='btn btn-purple btn-sm' disabled id='tsxxDisagree'  onclick='dealOptType(\"disAgree\");'>\
+					<i class='fa fa-times'></i> 我不同意（"+infoTime+"s）\
+				</button>\
+				</div>");
+            var wHeight = $(window).height();
+           // $(".modal-content").css("top", "30px");
+            $(".modal-content").css("overflow", "auto");
+            $(".modal-content").css("height", wHeight - 120);
+            mod.modal({
+                backdrop: 'static',
+                keyboard: false
+            }).on('hide.bs.modal', function () {
+                $("body").removeClass('modal-open');
+                $("body").css('padding-right', '0px');
+                mod.remove();
+                $('.modal-backdrop').remove();
+                return false;
+            });
+     
+            tt = infoTime;
+            timer = setInterval(function () {
+                //console.log($("#tsxxClose").html());
+                tt--;
+                if (tt == 0) {
+                    $(mod).find("#tsxxAgree").html("<i class='fa fa-times'></i> 我自愿承诺");
+                    $(mod).find("#tsxxAgree").prop("disabled", false);
+                    
+                    $(mod).find("#tsxxDisagree").html("<i class='fa fa-times'></i>我不同意");
+                    $(mod).find("#tsxxDisagree").prop("disabled", false);
+                    clearInterval(timer);
+                } else {
+                    $(mod).find("#tsxxAgree").html("<i class='fa fa-times'></i> 我自愿承诺（" + tt + "s）");
+                    $(mod).find("#tsxxDisagree").html("<i class='fa fa-times'></i> 我不同意（" + tt + "s）");
+                }
+            }, 1000);
+        }
+        
+ 		function downfile(tzid){
+			var fm=document.getElementById("frm");
+			fm.action="/student/courseSelect/courseSelectNotice/downloadFile/"+tzid;
+			fm.submit();
+		}
+
+
+		function dealOptType(flag){
+			
+			
+			if(flag == "agree"){
+				$("#right-menu").modal("hide");
+				//加载列表数据
+				getJxpgList(1, 10, true);
+			}else{//disAgree
+				$("#right-menu").modal("hide");
+				
+			}
+		}
+
+
+        function notevaluation(wjbm,wjmc,jsh,jsm,kch){
+            /*alert(wjbm);
+            alert(wjmc);
+            alert(jsh);
+            alert(jsm);
+            alert(kch);*/
+            var modal = urp.addModelHt("80%");
+            var url = "/student/teachingEvaluation/notevaluation/"+wjbm+"/"+wjmc+"/"+jsh+"/"+jsm+"/"+kch;
+
+            modal.modal({
+                remote: url
+            }).on('hide.bs.modal', function () {
+                modal.remove();
+                $('.modal-backdrop').remove();
+                return false;
+            });
+        }
+
+
+
+        var select_old_value=new Array();
+        var select_old_index=new Array();
+
+        function clearTotal(index,length){//4
+            var indexvalue=document.getElementById('order_'+index);//获取选择select对象
+            var str=document.getElementById('order_'+index).value;//获取选择select对象下的值
+            var obj= document.getElementById('order_'+index);//获取选择select对象
+            var iindex=obj.selectedIndex;//返回下拉列表中被选选项的索引号
+            var val = obj.options[iindex].text;//指定索引值获取下拉列表值
+            var flag=false;
+            var flagIndex;
+            if(select_old_index.length>0){
+                for(var j=select_old_index.length-1;j>=0;j--){
+                    if(index==select_old_index[j]){
+                        flag=true;
+                        flagIndex=j;
+                        break;
+                    }
+                }
+            }
+            if(flag){
+                for(var i=1;i<=length;i++){
+                    if(i!=index){
+                        var obj1=document.getElementById('order_'+i);
+                        if(obj1!=null){
+                            for(var m=0;m<obj1.length;m++){
+                                if(obj1[m].value==val){
+                                    obj1.options.remove(m);
+                                }
+
+                            }
+                        }
+
+                        obj1.options.add(new Option(select_old_value[flagIndex],select_old_value[flagIndex]));
+                    }
+                }
+            }else{
+                for(var i=1;i<=length;i++){
+                    if(i!=index){
+
+                        var obj1=document.getElementById('order_'+i);
+                        for(var m=0;m<obj1.length;m++){
+
+                            if(obj1[m].value==val){
+                                obj1.options.remove(m);
+                            }
+                        }
+
+                    }
+                }
+
+            }
+            select_old_index.push(index);
+            select_old_value.push(val);
+            for(var i=1;i<=length;i++ ){
+
+                if(i!=index){
+                    var strj=document.getElementById('order_'+i).value;
+                    if(strj!=null&&strj!=("")){
+                        if(strj==str){
+                            alert("与第"+i+"行有排名重复！");
+                        }
+                    }
+                }
+            }
+        }
+
+        function saveRanking() {
+            var count = $("#count").val();
+            for(var i= 1;i<=count;i++){
+                var str=document.getElementById('order_'+i).value;
+                if(str==null||str==''){
+                    urp.alert("第"+i+"行的教师名次不能为空！");
+                    return false;
+                }
+            }
+            urp.confirm("是否确认选择，保存后不可修改？", function(f) {
+                if(f) {
+                    var pageConditions = $(document.WjList).serialize();
+                    var index;
+                    $.ajax({
+                        url: "/student/teachingEvaluation/teachingEvaluation/saveRanking",
+                        cache: false,
+                        type: "post",
+                        data: pageConditions,
+                        dataType: "json",
+                        beforeSend: function () {
+                            index = layer.load(0, {
+                                shade: [0.2, "#000"] //0.1透明度的白色背景
+                            });
+                        },
+                        success: function (data) {
+                            if (data.result.indexOf("/") != -1) {
+                                urp.alert("保存排名出错，请刷新！");
+                            } else {
+                                if(data.result == "ok"){
+                                    urp.alert("保存排名成功！");
+                                } else if(data.result == "no"){
+                                    urp.alert("保存排名失败！");
+                                }
+                                window.location.href = "/student/teachingEvaluation/evaluation/index";
+                            }
+
+                        },
+                        complete: function () {
+                            layer.close(index);
+                        },
+                        error: function (xhr) {
+                            layer.close(index);
+                            urp.alert("错误代码[" + xhr.readyState + "-" + xhr.status + "]:获取数据失败！");
+                        }
+                    });
+                }
+            });
+        }
+
+
+        
+        function lyhd(wjbm,wjmc,jsh,jsm,kch,kxh){
+        	window.location.href="/student/teachingEvaluation/teachingEvaluation/lyhd?wjbm="+wjbm+"&wjmc="+wjmc+"&jsh="+jsh+"&jsm="+jsm+"&kch="+kch+"&kxh="+kxh;
+        }
+        
+        function getNowFormatDate() {
+		    var date = new Date();
+		    var seperator1 = "年";
+		    var seperator2 = "月";
+		    var year = date.getFullYear();
+		    var month = date.getMonth() + 1;
+		    var strDate = date.getDate();
+		    if (month >= 1 && month <= 9) {
+		        month = "0" + month;
+		    }
+		    if (strDate >= 0 && strDate <= 9) {
+		        strDate = "0" + strDate;
+		    }
+		    var currentdate = year + seperator1 + month + seperator2 + strDate+"日";
+		    return currentdate;
+		}
+        
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #curriculumInfo-divcon {
+            width: 0;
+            height: 95%;
+            background: #fff;
+            /*position: absolute;*/
+            top: 35px;;
+            right: 0;
+            /*display:none;*/
+            box-shadow: #a9a9a9 0px 0px 10px;
+            -webkit-box-shadow: #a9a9a9 0px 0px 10px;
+            -moz-box-shadow: #a9a9a9 0px 0px 10px;
+            overflow: auto;
+            position: fixed;
+            z-index: 999;
+        }
+
+        .div-title {
+            width: 100%;
+            position: relative;
+            border-bottom: #eeece8 solid 1px;
+        }
+
+        .div-title h3 {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 55px;
+            color: #999;
+            text-indent: 23px;
+            font-weight: normal;
+        }
+
+        .div-title span {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            margin-right: 10px;
+            display: inline-block;
+            position: absolute;
+            right: 0px;
+            top: 15px;
+            width: 50px;
+            height: 25px;
+            border-left: #dbdbdb solid 1px;
+        }
+
+    </style>
+
+
+</head>
+<body class="no-skin">
+
+<!-- 查看详情专用 -->
+<div class="modal fade" id="view-table" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:60%;">
+		<div class="modal-content">
+			<div class="center">
+				<span class="view-pre-loading"></span>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 查看详情专用 -->
+
+<div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					调课后的周次
+				</h4>
+			</div>
+			<div class="modal-body">
+				开始周次:<input type="text" name="kszc" id="kszc" readonly="readonly"><br>
+				结束周次:<input type="text" name="jszc" id="jszc"><br>
+				选择周次模式:<input type="radio" name="zcms" value="1" style="width:20px"> 全周 &nbsp;&nbsp;
+				<input type="radio" name="zcms" value="2" style="width:20px"> 单周&nbsp;&nbsp;
+				<input type="radio" name="zcms" value="3" style="width:20px"> 双周
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default">
+					保存
+				</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">
+					关闭
+				</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('navbar', 'fixed')
+		} catch (e) {
+		}
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+			<span class="sr-only">Toggle sidebar</span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+
+			<span class="icon-bar"></span>
+		</button>
+		<div class="navbar-header pull-left">
+			<a href="https://jws.qgxy.cn/" class="navbar-brand" id="0" onclick="toSelect(this);">
+				<small style="font-weight:700;font-family:微软雅黑">
+					<!--
+					<i class="fa fa-leaf"></i>
+					Ace Admin
+					 -->
+					
+					URP高校教务管理系统
+
+				</small>
+			</a>
+		</div>
+
+		<div class="navbar-buttons navbar-header pull-right" role="navigation">
+			<ul class="nav ace-nav">
+				<li class="green" style="text-align: center">
+					<div class="intellegenceUDiv" style="z-index:1" id="intellegenceUDiv">
+						<div style="height:100%; width:32px; display:inline-block;
+									 position:absolute;line-height:100%;left:-32px;
+									 background-color:#777; " id="clickdiv" onclick="changeInfo()">
+							<i class="fa fa-search white" style="margin-top: 50%;" id="clicki"></i>
+						</div>
+					</div>
+					<div id="form-search" class="nav-search" style="width: 0px; right: 0px; margin-top: 8px; margin-right: 20px; background-color: rgba(0, 0, 0, 0); z-index: -1;">
+						<form class="form-search">
+							<span class="input-icon">
+								<input type="text" placeholder="查找功能..." class="nav-search-input" id="search-input" autocomplete="off">
+								<i class="ace-icon fa fa-search blue"></i>
+							</span>
+						</form>
+					</div>
+					<!-- 通知   -->
+
+						
+				<!-- 展示当前的学期季度信息 -->
+				</li><li class="light-red" style="text-align: center">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" onclick="SchoolCalendar()">
+						<i class="ace-icon fa fa-calendar"></i>
+
+
+2025-2026 春  第20周   星期二
+					</a>
+				</li>
+				
+
+				
+				<li class="light-blue" style="text-align: center">
+					<a data-toggle="dropdown" href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+						<img class="nav-user-photo" src="./学生评估问卷列表_files/man.png" onerror="this.src=&#39;/img/head/man.png&#39;" alt="Jason&#39;s Photo">
+						<span class="user-info">
+							<small>欢迎您，</small>
+							
+
+
+王文佳
+						</span>
+						<i class="ace-icon fa fa-caret-down"></i>
+					</a>
+
+					<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+						<li>
+							<a href="https://jws.qgxy.cn/" title="主页" id="0" onclick="toSelect(this);">
+								<i class="ace-icon fa fa-home"></i>首页
+							</a>
+						</li>
+
+						<li>
+							<a href="javascript:changePassword(&#39;/student/rollManagement/personalInfoUpdate/updatePassword&#39;)">
+								<i class="ace-icon fa fa-user"></i>
+								修改密码
+							</a>
+						</li>
+
+						<li class="divider"></li>
+
+						<li>
+							<a id="logout" href="https://jws.qgxy.cn/logout" title="退出系统">
+								<i class="ace-icon fa fa-power-off"></i>
+								注销
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+				<!-- 主页 -->
+				<!-- <li class="light-blue" style="text-align: center" >
+					 <a href="/" title="主页" id='0' onclick="toSelect(this);">
+						<i class="ace-icon fa fa-home"></i>
+					</a>
+				</li>
+				<li  class="light-blue" style="text-align: center" >
+					<a href="/logout" title="退出系统" onclick="removeCookie();">
+						<i class="ace-icon fa fa-power-off"></i>
+					</a>
+				</li>
+-->
+			</ul>
+		</div>
+	</div>
+	<!-- /.navbar-container -->
+</div>
+
+<div class="main-container" id="main-container">
+	<script type="text/javascript">
+		function changeInfo() {
+			$("#form-search").animate({width: '152px', right: '22px'});
+			//margin-top: 8px; margin-right:20px;
+		}
+
+		$(document).click(function (e) {
+			var id = $(e.target).attr("id");
+			if (id == "clickdiv" || id == "clicki" || id == "search-input") {
+
+			} else {
+				$("#form-search").animate({width: '0px', right: '0px'});
+			}
+		})
+		try {
+			ace.settings.check('main-container', 'fixed')
+		} catch (e) {
+		}
+
+		function SchoolCalendar() {
+			//	var ifheight = $(window).height()-$(".modal-content").offset().top ;
+			$(".modal-content").html("<iframe width='100%' style='width:100%; min-height:600px; height:100%; overflow: hidden;' src='/indexCalendar' ></iframe>");
+			//$(".modal-content iframe").css("max-height",ifheight);
+			$("#view-table").modal().show().on("hidden.bs.modal", function () {
+				$(this).removeData("bs.modal");
+			});
+		}
+
+		var sUserAgent = navigator.userAgent.toLowerCase();
+		var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+		var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+		var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+		var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+		var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+		var bIsAndroid = sUserAgent.match(/android/i) == "android";
+		var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+		var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+		var isMenuToDeal = true;
+
+		function rootMenuClick(obj) {
+			if (isMenuToDeal && !$(obj).hasClass("open")) {
+				$.each($(obj).find(".hsub"), function () {
+					if ($(this).hasClass("open")) {
+						isMenuToDeal = false;
+					}
+				});
+			} else {
+				isMenuToDeal = false;
+			}
+
+			if (isMenuToDeal) {
+				var firobj = $(obj).children("ul").children("li").first();
+				firobj.addClass("open");
+				$(firobj).children("ul").css("display", "block");
+			} else {
+				isMenuToDeal = true;
+			}
+		}
+
+		function stopHere(e) {
+			isMenuToDeal = false;
+		}
+
+		/*菜单上的搜索框*/
+		$(document).ready(function () {
+			var obj_lis = $("#menus").find("li > ul > li > ul > li");
+			var obj_menus = new Array();
+			for (i = 0; i < obj_lis.length; i++) {
+				obj_menus[i] = $.trim($(obj_lis[i]).find("a:first").text());
+			}
+			try {
+				$("#search-input").bs_typeahead({
+					source: obj_menus,
+					updater: function (a) {
+						for (i = 0; i < obj_lis.length; i++) {
+							if (a == $.trim($(obj_lis[i]).find("a:first").text())) {
+								$.cookie('selectionBar', obj_lis[i].id, {
+									path: '/'
+								});
+								window.location.href = $(obj_lis[i]).find("a:first").attr("href");
+								break;
+							}
+						}
+						return a;
+					}
+				})
+			} catch (a) {
+			}
+		});
+
+		function changePassword(url) {
+			///student/rollManagement/personalInfoUpdate/updatePassword
+			$('#view-table').modal({
+				remote: url
+			}).on("hidden.bs.modal", function () {
+				/*$("div").remove(".widget-box");*/
+				$(this).removeData("bs.modal");
+			}).css({
+				width: 'auto'
+			});
+		}
+
+	</script>
+
+	<style type="text/css">
+		.sidebar > .nav-search {
+			position: static;
+			background-color: #FAFAFA;
+			border-bottom: 1px solid #DDD;
+			text-align: center;
+			height: 35px;
+			padding-top: 0px;
+		}
+
+		.sidebar > .nav-search .nav-search-input {
+			width: 162px !important;
+			border-radius: 5px !important;
+			max-width: 162px !important;
+			opacity: 1 !important;
+			filter: alpha(opacity=100) !important;
+		}
+
+		#breadcrumbs li {
+			cursor: pointer;
+		}
+	</style>
+	<div id="sidebar" class="sidebar responsive sidebar-fixed">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('sidebar', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div style="position: relative;"><div class="nav-wrap"><div style="position: relative; top: 0px; transition-property: top; transition-duration: 0.2s;"><ul class="nav nav-list" id="menus">
+			
+
+			
+			<li class="hsub" id="1181690" onclick="rootMenuClick(this);">
+				<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-user"></i>
+					<span class="menu-text">个人管理
+					</span>
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+
+				<b class="arrow"></b>
+				
+				<ul class="submenu" onclick="stopHere();">
+					
+					<li class="hsub" id="1188620">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							学籍管理
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1183421" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/rollInfo/index">&nbsp;&nbsp;
+									学生学籍信息
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183422" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/personalInfoUpdate/index">&nbsp;&nbsp;
+									个人信息修改
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183423" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/rollChanges/index">&nbsp;&nbsp;
+									学籍异动
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183424" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/rewardsAndPenalties/index">&nbsp;&nbsp;
+									奖惩信息
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183425" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/electronicRegistration/index">&nbsp;&nbsp;
+									电子注册
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183426" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/minorProgramRegistration/index">&nbsp;&nbsp;
+									辅修方案注册
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="125803404" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/rollManagement/informationCollection/index">&nbsp;&nbsp;
+									监护人信息采集
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1188621">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							学生异动
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1183428" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/personalManagement/studentChange/index">&nbsp;&nbsp;
+									学籍异动申请
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1188622">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							毕业设计
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1183620" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/personalManagement/projectSelect/index">&nbsp;&nbsp;
+									网上选题
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183621" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/personalManagement/paperSubmit/index">&nbsp;&nbsp;
+									论文提交
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183622" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/personalManagement/projectScore/index">&nbsp;&nbsp;
+									毕业设计成绩查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1183623" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/personalManagement/excellentProject/index">&nbsp;&nbsp;
+									优秀毕业设计名单查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+				</ul>
+				
+			</li>
+			
+			<li class="hsub" id="82020" onclick="rootMenuClick(this);">
+				<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-shopping-cart"></i>
+					<span class="menu-text">选课管理
+					</span>
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+
+				<b class="arrow"></b>
+				
+				<ul class="submenu" onclick="stopHere();">
+					
+					<li class="hsub" id="82021">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							本学期课表
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="82022" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/thisSemesterCurriculum/index">&nbsp;&nbsp;
+									本学期课表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1162620" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/calendarSemesterCurriculum/index">&nbsp;&nbsp;
+									历年学期课表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1293220">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							选课管理
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1293217" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/courseSelectNotice/index">&nbsp;&nbsp;
+									选课公告
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1293218" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/courseSelect/index">&nbsp;&nbsp;
+									选课
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1293219" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/courseSelectResult/index">&nbsp;&nbsp;
+									选课结果
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1293221" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/quitCourse/index">&nbsp;&nbsp;
+									退课
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1298420" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/courseSelect/courseSelectFailed/index">&nbsp;&nbsp;
+									选课失败信息
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+				</ul>
+				
+			</li>
+			
+			<li class="hsub open" id="12580300" onclick="rootMenuClick(this);">
+				<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-pencil"></i>
+					<span class="menu-text">教学评估
+					</span>
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+
+				<b class="arrow"></b>
+				
+				<ul class="submenu nav-show" onclick="stopHere();" style="display: block;">
+					
+					<li class="hsub open" id="12580301">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							评估
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu" style="display: block;">
+							
+							<li class="active" id="12580302" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index"><i class="menu-icon fa fa-caret-right"></i>&nbsp;&nbsp;
+									教学评估
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+				</ul>
+				
+			</li>
+			
+			<li class="hsub" id="1423377" onclick="rootMenuClick(this);">
+				<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-list-alt"></i>
+					<span class="menu-text">考务管理
+					</span>
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+
+				<b class="arrow"></b>
+				
+				<ul class="submenu" onclick="stopHere();">
+					
+					<li class="hsub" id="1423378">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							考务管理
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1423379" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/examinationManagement/examPlan/index">&nbsp;&nbsp;
+									考试安排
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423380" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/examinationManagement/examSignUp/index">&nbsp;&nbsp;
+									考试报名
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423381" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/examinationManagement/examGrade/index">&nbsp;&nbsp;
+									考试成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423382" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/examinationManagement/cetSignUp/index">&nbsp;&nbsp;
+									四六级报名
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423383" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/examinationManagement/cetGrade/index">&nbsp;&nbsp;
+									四六级成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+				</ul>
+				
+			</li>
+			
+			<li class="hsub" id="1423370" onclick="rootMenuClick(this);">
+				<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-building-o"></i>
+					<span class="menu-text">教学资源
+					</span>
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+
+				<b class="arrow"></b>
+				
+				<ul class="submenu" onclick="stopHere();">
+					
+					<li class="hsub" id="1423371">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							教学资源
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1423372" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingResources/classroomCurriculum/index">&nbsp;&nbsp;
+									教室课表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423373" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingResources/teacherCurriculum/index">&nbsp;&nbsp;
+									教师课表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423374" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingResources/classCurriculum/index">&nbsp;&nbsp;
+									班级课表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1423384" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingResources/courseCurriculum/index">&nbsp;&nbsp;
+									课程课表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1443371">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							自习查询
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1443372" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingResources/freeClassroom/index">&nbsp;&nbsp;
+									空闲教室查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1443384" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/teachingResources/classroomUseStatus/index">&nbsp;&nbsp;
+									教室使用状况查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+				</ul>
+				
+			</li>
+			
+			<li class="hsub" id="1377620" onclick="rootMenuClick(this);">
+				<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-search-plus"></i>
+					<span class="menu-text">综合查询
+					</span>
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+
+				<b class="arrow"></b>
+				
+				<ul class="submenu" onclick="stopHere();">
+					
+					<li class="hsub" id="1377621">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							成绩查询
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="125803405" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/scoreQuery/allTermScores/index">&nbsp;&nbsp;
+									历年成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1379870" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/scoreQuery/allPassingScores/index">&nbsp;&nbsp;
+									全部及格成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1417250" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/scoreQuery/coursePropertyScores/index">&nbsp;&nbsp;
+									课程属性成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1443373" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/scoreQuery/schemeScores/index">&nbsp;&nbsp;
+									方案成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1443374" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/scoreQuery/unpassedScores/index">&nbsp;&nbsp;
+									不及格成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1443375" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/scoreQuery/thisTermScores/index">&nbsp;&nbsp;
+									本学期成绩
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1377622">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							培养方案完成情况
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1377623" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/planCompletion/index">&nbsp;&nbsp;
+									方案完成情况
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1443376">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							指导性计划完成情况
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1443377" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/instructionPlanQuery/detail/index">&nbsp;&nbsp;
+									指导性教学计划
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1443378">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							课程
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1443379" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/course/courseSchdule/index">&nbsp;&nbsp;
+									本学期课程安排
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1443380" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/course/courseBasicInformation/basicInf">&nbsp;&nbsp;
+									课程基本信息
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+					<li class="hsub" id="1443381">
+						<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-caret-right"></i>
+							教材
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						
+						<ul class="submenu">
+							
+							<li class="" id="1443382" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/teachingMaterial/SelectionSearch/index">&nbsp;&nbsp;
+									教材选定查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+							<li class="" id="1443383" onclick="toSelect(this);">
+								<a href="https://jws.qgxy.cn/student/integratedQuery/teachingMaterial/ReceiveSearch/index">&nbsp;&nbsp;
+									教材领取查询
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
+						</ul>
+
+						
+					</li>
+					
+				</ul>
+				
+			</li>
+			
+
+		</ul></div></div><div class="ace-scroll nav-scroll"><div class="scroll-track" style="display: none;"><div class="scroll-bar" style="top: 0px; transition-property: top; transition-duration: 0.13s;"></div></div><div class="scroll-content" style=""><div></div></div></div></div>
+		<!-- /.nav-list -->
+
+		<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse" style="z-index: 1;">
+			<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+		</div>
+
+		<script type="text/javascript">
+			try {
+				ace.settings.check('sidebar', 'collapsed')
+			} catch (e) {
+			}
+		</script>
+	</div>
+
+	<div class="main-content">
+		<div class="breadcrumbs" id="breadcrumbs">
+			<script type="text/javascript">
+				try {
+					ace.settings.check('breadcrumbs', 'fixed')
+				} catch (e) {
+				}
+			</script>
+
+			<ul class="breadcrumb">
+				<li onclick="javascript:window.location.href=&#39;/&#39;" style="cursor:pointer;">
+					<i class="ace-icon fa fa-home home-icon"></i>
+					首页
+				</li>
+				<li class="active" onclick="ckickTopMenu(this);return false;" id="firmenu" menuid="12580300">教学评估</li>
+				<li class="active" onclick="ckickTopMenu(this);return false;" id="secmenu" menuid="12580301">评估</li>
+				<li class="active" onclick="ckickTopMenu(this);return false;" id="lastmenu" menuid="12580302">教学评估</li>
+			</ul>
+			<!-- /.breadcrumb -->
+		</div>
+
+		<div class="page-content" id="page-content-template">
+			<!-- 					<div class="ace-settings-container" id="ace-settings-container"> -->
+			<!-- 						<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn"> -->
+			<!-- 							<i class="ace-icon fa fa-cog bigger-150"></i> -->
+			<!-- 						</div> -->
+
+			<!-- 						<div class="ace-settings-box clearfix" id="ace-settings-box"> -->
+			<!-- 							<div class="pull-left width-50"> -->
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<div class="pull-left" style="height:13px;"> -->
+			<!-- 										<select id="skin-colorpicker" class="hide" style="background: red; height:13px;"> -->
+			<!-- 											<option data-skin="no-skin" value="#438EB9">#438EB9</option> -->
+			<!-- 											<option data-skin="skin-1" value="#222A2D">#222A2D</option> -->
+			<!-- 											<option data-skin="skin-2" value="#C6487E">#C6487E</option> -->
+			<!-- 											<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option> -->
+			<!-- 										</select> -->
+			<!-- 									</div> -->
+			<!-- 									<span>&nbsp; Choose Skin</span> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" checked="checked"/> -->
+			<!-- 									<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" checked="checked"/> -->
+			<!-- 									<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs"/> -->
+			<!-- 									<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" /> -->
+			<!-- 									<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" /> -->
+			<!-- 									<label class="lbl" for="ace-settings-add-container"> -->
+			<!-- 										Inside -->
+			<!-- 										<b>.container</b> -->
+			<!-- 									</label> -->
+			<!-- 								</div> -->
+			<!-- 							</div>/.pull-left -->
+
+			<!-- 							<div class="pull-left width-50"> -->
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" /> -->
+			<!-- 									<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" /> -->
+			<!-- 									<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label> -->
+			<!-- 								</div> -->
+
+			<!-- 								<div class="ace-settings-item"> -->
+			<!-- 									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" /> -->
+			<!-- 									<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label> -->
+			<!-- 								</div> -->
+			<!-- 							</div>/.pull-left -->
+			<!-- 						</div>/.ace-settings-box -->
+			<!-- 					</div>/.ace-settings-container -->
+
+			
+<input type="hidden" id="schoolId" value="100059">
+<input type="hidden" id="infoOff" value="">
+<input type="hidden" id="infoTime" value="">
+<div id="infoContent" style="display: none;">
+
+</div>
+
+
+    <div class="row">
+        <div class="col-xs-12 self-margin" id="close">
+            <h4 class="header smaller lighter grey">
+                <i class="fa fa-pencil-square-o"></i>
+                教学评估
+               
+            </h4>
+
+            <div class="alert alert-block alert-success">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+
+                <i class="ace-icon fa fa-exclamation-circle orange"></i>
+                &nbsp;
+                当前评估学期为2025-2026学年春，您需要评估的课程如下，共<label id="totalkc">12</label>门，还有<label id="wpgkc">7</label>门待评估
+            </div>
+             <form method="POST" name="zgnyEvaluationCover" action="https://jws.qgxy.cn/student/teachingEvaluation/teachingEvaluation/zgnyEvaluationCover">
+                <input type="hidden" name="evaluatedPeople" id="evaluatedPeople">
+                <input type="hidden" name="evaluatedPeopleNumber" id="evaluatedPeopleNumber">
+                <input type="hidden" name="questionnaireCode" id="questionnaireCode">
+                <input type="hidden" name="questionnaireName" id="questionnaireName">
+                <input type="hidden" name="evaluationContentNumber" id="evaluationContentNumber">
+             </form>
+            <form method="POST" name="WjList" action="https://jws.qgxy.cn/student/teachingEvaluation/teachingEvaluation/evaluationPage">
+                <input type="hidden" name="count" id="count" value="12">
+                <input type="hidden" name="evaluatedPeople">
+                <input type="hidden" name="evaluatedPeopleNumber">
+                <input type="hidden" name="questionnaireCode">
+                <input type="hidden" name="questionnaireName">
+                <input type="hidden" name="coureSequenceNumber">
+                <input type="hidden" name="evaluationContentNumber">
+                <input type="hidden" name="evaluationContentContent">
+                <input type="hidden" id="tokenValue" name="tokenValue" value="19ec09b51a77226eaf929e35d44bd9e5">
+                <div class="row">
+                    <div class="col-xs-12" id="page_div" style="overflow: auto;max-height: calc(100vh - 240px);">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th style="text-align:center">操作</th>
+                                <th style="text-align:center">问卷名称</th>
+                                <th style="text-align:center">被评人</th>
+                                <th style="text-align:center">评估内容</th>
+                              
+
+                                <th style="text-align:center">是否已评估</th>
+                            </tr>
+                            </thead>
+                            <tbody id="jxpgtbody"><tr><td><button class="btn btn-info btn-round btn-xs" onclick="evaluationResult(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90062&quot;,&quot;周明亮&quot;,&quot;Q21015&quot;);return false;"><i class="ace-icon fa fa-eye"></i>查看</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>周明亮</td><td>习近平新时代中国特色社会主义思想概论</td><td> <span class="label label-success arrowed">是</span></td></tr><tr><td><button class="btn btn-info btn-round btn-xs" onclick="evaluationResult(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90172&quot;,&quot;董翠芝&quot;,&quot;QXSC08&quot;);return false;"><i class="ace-icon fa fa-eye"></i>查看</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>董翠芝</td><td>职业核心能力-4</td><td> <span class="label label-success arrowed">是</span></td></tr><tr><td><button class="btn btn-info btn-round btn-xs" onclick="evaluationResult(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90199&quot;,&quot;习开磊&quot;,&quot;Q28008&quot;);return false;"><i class="ace-icon fa fa-eye"></i>查看</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>习开磊</td><td>体育-4</td><td> <span class="label label-success arrowed">是</span></td></tr><tr><td><button class="btn btn-info btn-round btn-xs" onclick="evaluationResult(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90343&quot;,&quot;张颖&quot;,&quot;Q52344&quot;);return false;"><i class="ace-icon fa fa-eye"></i>查看</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>张颖</td><td>面向对象程序设计</td><td> <span class="label label-success arrowed">是</span></td></tr><tr><td><button class="btn btn-info btn-round btn-xs" onclick="evaluationResult(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90431&quot;,&quot;杜萧成&quot;,&quot;Q18407&quot;);return false;"><i class="ace-icon fa fa-eye"></i>查看</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>杜萧成</td><td>数据库原理与应用-1</td><td> <span class="label label-success arrowed">是</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90431&quot;,&quot;杜萧成&quot;,&quot;Q52360&quot;,&quot;03&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>杜萧成</td><td>数据库原理与应用课程设计</td><td> <span class="label label-light arrowed">否</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90471&quot;,&quot;赵艳娟&quot;,&quot;Q20008&quot;,&quot;60&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>赵艳娟</td><td>大学英语-4</td><td> <span class="label label-light arrowed">否</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90562&quot;,&quot;付兴&quot;,&quot;Q52354&quot;,&quot;06&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>付兴</td><td>JavaScript脚本</td><td> <span class="label label-light arrowed">否</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90634&quot;,&quot;刘亨昌&quot;,&quot;Q21011&quot;,&quot;22&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>刘亨昌</td><td>形势与政策-4</td><td> <span class="label label-light arrowed">否</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90644&quot;,&quot;王双慧&quot;,&quot;Q52345&quot;,&quot;10&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>王双慧</td><td>计算机网络</td><td> <span class="label label-light arrowed">否</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;90645&quot;,&quot;刘美彤&quot;,&quot;Q52356&quot;,&quot;07&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>刘美彤</td><td>UI交互设计与表现</td><td> <span class="label label-light arrowed">否</span></td></tr><tr><td><button class="btn btn-xs btn-round btn-purple" onclick="evaluation(&quot;0000000150&quot;,&quot;2025-2026学年春季学期教师教学质量评价表&quot;,&quot;99400&quot;,&quot;钟立群&quot;,&quot;Q21011&quot;,&quot;22&quot;);return false;"><i class="ace-icon fa fa-edit"></i>评估</button></td><td>2025-2026学年春季学期教师教学质量评价表</td><td>钟立群</td><td>形势与政策-4</td><td> <span class="label label-light arrowed">否</span></td></tr></tbody>
+                        </table>
+                        <!-- 页码开始 -->
+                        <!-- <div id="urppagebar"></div> -->
+                        <!-- 页码结束 -->
+                    </div>
+                    <div id="mesage_div"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="widget-box" id="curriculumInfo-divcon" style="margin-top: 0px; width: 0px;">
+        <div class="row" style="margin-right: 0px; margin-left: 0px;">
+            <div class="div-title" id="div_title_show">
+            </div>
+            <div class="col-xs-12" id="left_div">
+            	<div id="pgtbody">
+            	</div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+		</div>
+		<!-- /.page-content -->
+	</div>
+	<!-- /.main-content -->
+
+
+	<a href="https://jws.qgxy.cn/student/teachingEvaluation/evaluation/index#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+		<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+	</a>
+</div>
+<!-- /.main-container -->
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+	$(function () {
+
+		
+		if (false) {
+			/*var showResetpass = $.cookie('showResetpass');
+			if (showResetpass == null) {
+				$.cookie('showResetpass', "0");
+				var bar = $.cookie('selectionBar');*/
+			$("#view-table .modal-dialog").css("width", "60%");
+			$('#view-table').modal({
+				remote: "/template/forcereset",
+				backdrop: "static",
+				keyboard: false
+			}).on("hidden.bs.modal", function () {
+				$("#view-table .modal-dialog").css("width", "60%");
+				$("#view-table .modal-content").html('<div class="center">\
+                            <img src="/img/icon/pageloading.gif" style="width:28px;height:28px;">\
+                        </div>');
+				$(this).removeData("bs.modal");
+			});
+
+
+			//}
+		}
+	});
+
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var bar = $.cookie('selectionBar');
+		if (bar && bar != 0) {
+			if (true) {
+				var barObj = document.getElementById(bar);
+				var pts = $(barObj).parents("li");
+				for (var i = pts.length - 1; i >= 0; i--) {
+					if (!$(pts[i]).hasClass("open")) {
+						$(pts[i]).children("a").click();
+					}
+				}
+				barObj == null ? barObj = document.getElementById(bar) : barObj.className = "active";
+				$(barObj).find("a").prepend("<i class='menu-icon fa fa-caret-right'></i>");
+			}
+
+			var lastmenu = $("#" + bar).find("a").first().text();
+			var secmenu = $("#" + bar).parent().parent().find("a").first().text();
+			var firmenu = $("#" + bar).parent().parent().parent().parent().find("a").first().text();
+
+			$("#lastmenu").html(lastmenu.replace(/(^\s*)|(\s*$)/g, ""));
+			$("#lastmenu").attr("menuid", bar);
+			$("#secmenu").html(secmenu.replace(/(^\s*)|(\s*$)/g, ""));
+			$("#secmenu").attr("menuid", $("#" + bar).parent().parent().attr("id"));
+			$("#firmenu").html(firmenu.replace(/(^\s*)|(\s*$)/g, ""));
+			$("#firmenu").attr("menuid", $("#" + bar).parent().parent().parent().parent().attr("id"));
+		} else {
+			$("#lastmenu").remove();
+			$("#secmenu").remove();
+			$("#firmenu").remove();
+		}
+	});
+
+	function ckickTopMenu(obj) {
+		if ($(obj).attr("menuid")) {
+			var menuid = $(obj).attr("menuid");
+			if ($("#" + menuid + " a:eq(0)").hasClass("dropdown-toggle")) {
+				if ($("#" + menuid).parents('.nav-list li').size() > 0) {
+					if ($("#" + menuid).parents('.nav-list li:eq(0)').hasClass("open")) {
+						$("#" + menuid + " a").trigger("click");
+					} else {
+						$("#" + menuid).parents('.nav-list li').find("a:eq(0)").trigger("click");
+						if (!$("#" + menuid).hasClass("open")) {
+							$("#" + menuid + " a").trigger("click");
+						}
+					}
+				} else {
+					$("#" + menuid + " a:eq(0)").trigger("click");
+				}
+			} else {
+				window.location.href = $("#" + menuid + " a:eq(0)").attr("href");
+			}
+		}
+	}
+
+
+	function toSelect(obj) {
+		$.cookie('selectionBar', obj.id, {
+			path: '/'
+		});
+	}
+
+	function removeCookie() {
+		$.cookie('JSESSIONID', null);
+	}
+
+	// 			$(function() {
+	// 				$('select').chosen({allow_single_deselect:true});
+	// 			});
+
+	function addslidersModel(id, width) {
+		var modal = '<div id="' + id + '" class="modal right fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1">\
+	            <div class="modal-dialog">\
+	                <div class="modal-content">\
+	                    <div class="center">\
+                            <img src="/img/icon/pageloading.gif" style="width:28px;height:28px;">\
+                        </div>\
+	                </div>\
+	            </div>\
+	        </div>';
+		var modal = $(modal).appendTo('body');
+		$(".modal-dialog").css("width", width);
+		return modal;
+	}
+
+	function openWorkRestSchedule() {
+		var modal = addslidersModel("work_rest_schedule_modal", "60%");
+		var url = "/main/queryRestSchedule";
+		modal.modal({
+			remote: url
+		}).on('hide.bs.modal', function () {
+			modal.remove();
+		});
+	}
+</script>
+
+
+</body><div id="immersive-translate-browser-popup" style="all: initial"><template shadowrootmode="open"><style>/** 基础色阶定义 **/
+:root,
+#mount[data-theme="light"],
+#mount:not([data-theme="dark"]) {
+  /* 中性灰阶（light） */
+  --c-00: #000000;
+  --c-22: #222222;
+  --c-33: #333333;
+  --c-66: #666666;
+  --c-83: #838383;
+  --c-99: #999999;
+  --c-c7: #c7c7c7;
+  --c-cc: #cccccc;
+  --c-e6: #e6e6e6;
+  --c-f5: #f5f5f5;
+  --c-ff: #ffffff;
+  /* 品牌主色阶（light） */
+  --p-main: #ea4c89;
+  --p-hover: #ec5e95;
+  --p-active: #e34a85;
+  --p-special: #ee71a2;
+  --p-disabled: #f4a5c4;
+  --p-text-disabled: #f9c9dc;
+  --p-weak: #fdedf3;
+  /* Surface 层级（light，TC 填充-1） */
+  --s-1: #f3f5f6;
+  --s-1-hover: #f6f8f9;
+  --s-1-active: #edf1f2;
+  --s-1-weak: #fafbfb;
+  /* 输入/边框（light，TC 填充-2） */
+  --input-bg-base: #fafbfc;
+  --input-border: #ecf0f7;
+  --input-border-strong: #e0e0e6;
+  --input-bg-strong: #fafdff;
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  /* 中性灰阶（dark） */
+  --c-00: #ffffff;
+  --c-22: #dbdbdb;
+  --c-33: #dbdbdb;
+  --c-66: #b3b3b3;
+  --c-83: #838383;
+  --c-99: #707070;
+  --c-c7: #666666;
+  --c-cc: #5c5c5c;
+  --c-e6: #3b3b3b;
+  --c-f5: #262626;
+  --c-ff: #222222;
+  /* 品牌主色阶（dark） */
+  --p-main: #e23c7c;
+  --p-hover: #ea4c89;
+  --p-active: #d5467d;
+  --p-special: #a93a65;
+  --p-disabled: #7e2f4d;
+  --p-text-disabled: #522335;
+  --p-weak: #26171d;
+  /* Surface 层级（dark，TC 填充-1） */
+  --s-1: #2d2e2f;
+  --s-1-hover: #323434;
+  --s-1-active: #202121;
+  --s-1-weak: #262627;
+  /* 输入/边框（dark，TC 填充-2） */
+  --input-bg-base: #2b2d30;
+  --input-border: #3e434b;
+  --input-border-strong: #43474b;
+  --input-bg-strong: #1f2123;
+}
+
+:root,
+#mount [data-theme] {
+  /* 业务/通用变量引用色阶（全局可见，含 Shadow DOM） */
+  --primary: var(--p-main);
+  --primary-hover: var(--p-hover);
+  --primary-inverse: #fff;
+  --modal-background: var(--s-1);
+  --modal-border: var(--input-border);
+  --modal-text: var(--c-22);
+  --modal-text-secondary: var(--c-66);
+  --modal-error: var(--p-main);
+  --modal-required: #f53f3f;
+  --modal-success: #68cd52;
+  --modal-button-background: var(--p-main);
+  --modal-button-text: var(--c-ff);
+  --modal-input-background: var(--input-bg-base);
+  --modal-check-color: var(--p-main);
+  --background-color: var(--c-ff);
+  --background-light-green: var(--s-1-weak, #f5f7f9);
+  --text-black-2: var(--c-22);
+  --text-gray-2: var(--c-22);
+  --text-gray-6: var(--c-66);
+  --text-gray-9: var(--c-99);
+  --text-gray-c2: var(--c-c7);
+  --switch-background-color: var(--c-c7, hsl(205deg, 16%, 77%));
+  --float-ball-more-button-border-color: var(--c-f5, #f6f6f6);
+  --float-ball-more-button-background-color: var(--c-ff);
+  --float-ball-more-button-hover-color: var(--p-weak);
+  --float-ball-more-button-svg-color: #6c6f73;
+  --service-bg-hover: var(--s-1-hover, #f7faff);
+  --service-bg: var(--s-1-weak, #fafbfb);
+}
+
+#mount {
+  --font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Ubuntu",
+    "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  /* PC/H5 兼容的字号、间距、圆角、阴影变量 */
+  --f-12: 12px;
+  --f-14: 14px;
+  --f-15: 15px;
+  --f-16: 16px;
+  --f-18: 18px;
+  --f-20: 20px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-24: 24px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --control-height-lg: 44px;
+  --width-28: 28px;
+  --width-24: 24px;
+  --width-20: 20px;
+  --width-18: 18px;
+  --width-16: 16px;
+  --width-label-md: 56px;
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.12);
+
+  /* 常规变量 */
+  --line-height: 1.5;
+  --font-weight: 400;
+  --font-size: 16px;
+  --border-radius: 4px;
+  --border-width: 2px;
+  --outline-width: 3px;
+  --spacing: 16px;
+  --typography-spacing-vertical: 24px;
+  --block-spacing-vertical: calc(var(--spacing) * 2);
+  --block-spacing-horizontal: var(--spacing);
+  --grid-spacing-vertical: 0;
+  --grid-spacing-horizontal: var(--spacing);
+  --form-element-spacing-vertical: 12px;
+  --form-element-spacing-horizontal: 16px;
+  --nav-element-spacing-vertical: 16px;
+  --nav-element-spacing-horizontal: 8px;
+  --nav-link-spacing-vertical: 8px;
+  --nav-link-spacing-horizontal: 8px;
+  --form-label-font-weight: var(--font-weight);
+  --transition: 0.2s ease-in-out;
+  --modal-overlay-backdrop-filter: blur(4px);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+  --icon-xia: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9IkZyYW1lIj4KPHBhdGggaWQ9IlZlY3RvciIgZD0iTTguMDAyOTEgOS42Nzk4M0wzLjgzMzM5IDUuNTEyMjFMMy4wMjUzOSA2LjMxOTgzTDguMDAzMjkgMTEuMjk1MUwxMi45NzYyIDYuMzE5ODNMMTIuMTY3OSA1LjUxMjIxTDguMDAyOTEgOS42Nzk4M1oiIGZpbGw9IiM4MzgzODMiLz4KPC9nPgo8L3N2Zz4K");
+  /* 兼容旧变量：主色直接引用品牌主色阶 */
+  --primary: var(--p-main);
+  --primary-hover: var(--p-hover);
+  --primary-inverse: #fff;
+  /* Modal 业务变量引用色阶 */
+  --modal-background: var(--s-1);
+  --modal-border: var(--input-border);
+  --modal-text: var(--c-22);
+  --modal-text-secondary: var(--c-66);
+  --modal-error: var(--p-main);
+  --modal-required: #f53f3f;
+  --modal-success: #68cd52;
+  --modal-button-background: var(--p-main);
+  --modal-button-text: var(--c-ff);
+  --modal-input-background: var(--input-bg-base);
+  --modal-check-color: var(--p-main);
+  --background-color: var(--c-ff);
+  --background-light-green: var(--s-1-weak, #f5f7f9);
+  --text-black-2: var(--c-22);
+  --text-gray-2: var(--c-22);
+  --text-gray-6: var(--c-66);
+  --text-gray-9: var(--c-99);
+  --text-gray-c2: var(--c-c7);
+  --switch-background-color: var(--c-c7, hsl(205deg, 16%, 77%));
+  --float-ball-more-button-border-color: var(--c-f5, #f6f6f6);
+  --float-ball-more-button-background-color: var(--c-ff);
+  --float-ball-more-button-hover-color: var(--p-weak);
+  --float-ball-more-button-svg-color: #6c6f73;
+  --service-bg-hover: var(--s-1-hover, #f7faff);
+  --service-bg: var(--s-1-weak, #fafbfb);
+  line-height: var(--line-height);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+@media (max-width: 480px) {
+  :root,
+  #mount {
+    --f-12: 10px;
+    --f-14: 12px;
+    --f-15: 13px;
+    --f-16: 14px;
+    --f-18: 16px;
+    --f-20: 18px;
+    --space-4: 4px;
+    --space-6: 4px;
+    --space-8: 6px;
+    --space-12: 8px;
+    --space-16: 12px;
+    --space-18: 14px;
+    --space-24: 18px;
+    --radius-8: 6px;
+    --radius-12: 10px;
+    --radius-16: 12px;
+    --control-height-lg: 38px;
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+    --width-28: 24px;
+    --width-24: 20px;
+    --width-20: 16px;
+    --width-18: 14px;
+    --width-16: 12px;
+    --width-label-md: 52px;
+  }
+}
+
+#mount * {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:where(#mount) a,
+:where(#mount) [role="link"] {
+  --color: var(--primary);
+  --background-color: transparent;
+  outline: none;
+  background-color: var(--background-color);
+  color: var(--color);
+  -webkit-text-decoration: var(--text-decoration);
+  text-decoration: var(--text-decoration);
+  transition: background-color var(--transition), color var(--transition),
+    box-shadow var(--transition), -webkit-text-decoration var(--transition);
+  transition: background-color var(--transition), color var(--transition),
+    text-decoration var(--transition), box-shadow var(--transition);
+  transition: background-color var(--transition), color var(--transition),
+    text-decoration var(--transition), box-shadow var(--transition),
+    -webkit-text-decoration var(--transition);
+}
+:where(#mount) a:is([aria-current], :hover, :active, :focus),
+:where(#mount) [role="link"]:is([aria-current], :hover, :active, :focus) {
+  --color: var(--primary-hover);
+  --text-decoration: underline;
+}
+
+:where(#mount) label {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--text-gray-2, #222222);
+}
+
+:where(#mount) button {
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.3;
+  min-height: 44px;
+  border-radius: 12px;
+  padding: 0 14px;
+  border: none;
+  background-color: var(--primary, #ea4c89);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+:where(#mount) button:hover {
+  background-color: var(--primary-hover, #f082ac);
+}
+
+:where(#mount) button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+:where(#mount) select,
+:where(#mount) input,
+:where(#mount) textarea {
+  font-family: inherit;
+  color: var(--text-gray-2, #222222);
+}
+
+:where(#mount) select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-family: inherit;
+  color: var(--text-gray-2, inherit);
+  font-size: 13px;
+  line-height: 1.3;
+  outline: none;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--popup-item-background-color, transparent);
+  background-image: var(--icon-xia, none);
+  background-repeat: no-repeat;
+  background-position: center right 12px;
+  background-size: 16px auto;
+  cursor: pointer;
+}
+
+:where(#mount) input[type="checkbox"] {
+  accent-color: var(--primary, #ea4c89);
+}
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 1.25em;
+  height: 1.25em;
+  margin-top: -0.125em;
+  margin-right: 0.375em;
+  margin-left: 0;
+  -webkit-margin-start: 0;
+  margin-inline-start: 0;
+  -webkit-margin-end: 0.375em;
+  margin-inline-end: 0.375em;
+  border-width: var(--border-width);
+  font-size: inherit;
+  vertical-align: middle;
+  cursor: pointer;
+}
+[type="checkbox"]::-ms-check,
+[type="radio"]::-ms-check {
+  display: none;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:checked:active,
+[type="checkbox"]:checked:focus,
+[type="radio"]:checked,
+[type="radio"]:checked:active,
+[type="radio"]:checked:focus {
+  --background-color: var(--primary);
+  --border-color: var(--primary);
+  background-image: var(--icon-checkbox);
+  background-position: center;
+  background-size: 0.75em auto;
+  background-repeat: no-repeat;
+}
+[type="checkbox"] ~ label,
+[type="radio"] ~ label {
+  display: inline-block;
+  margin-right: 0.375em;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+[type="checkbox"]:indeterminate {
+  --background-color: var(--primary);
+  --border-color: var(--primary);
+  background-image: var(--icon-minus);
+  background-position: center;
+  background-size: 0.75em auto;
+  background-repeat: no-repeat;
+}
+
+[type="radio"] {
+  border-radius: 50%;
+}
+[type="radio"]:checked,
+[type="radio"]:checked:active,
+[type="radio"]:checked:focus {
+  --background-color: var(--primary-inverse);
+  border-width: 0.35em;
+  background-image: none;
+}
+
+:where(#mount) [type="checkbox"][role="switch"] {
+  --background-color: var(--switch-background-color);
+  --border-color: var(--switch-background-color);
+  --color: var(--switch-color);
+  width: 2.25em;
+  height: 1.25em;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 1.25em;
+  background-color: var(--background-color);
+  line-height: 1.25em;
+}
+:where(#mount) [type="checkbox"][role="switch"]:focus {
+  --background-color: var(--switch-background-color);
+  --border-color: var(--switch-background-color);
+}
+:where(#mount) [type="checkbox"][role="switch"]:checked {
+  --background-color: var(--switch-checked-background-color);
+  --border-color: var(--switch-checked-background-color);
+}
+:where(#mount) [type="checkbox"][role="switch"]:before {
+  display: block;
+  width: calc(1.25em - (var(--border-width) * 2));
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--color);
+  content: "";
+  transition: margin 0.1s ease-in-out;
+}
+:where(#mount) [type="checkbox"][role="switch"]:checked {
+  background-image: none;
+}
+:where(#mount) [type="checkbox"][role="switch"]:checked::before {
+  margin-left: calc(1.125em - var(--border-width));
+  -webkit-margin-start: calc(1.125em - var(--border-width));
+  margin-inline-start: calc(1.125em - var(--border-width));
+}
+
+:where(#mount) [type="checkbox"][aria-invalid="false"],
+:where(#mount) [type="checkbox"]:checked[aria-invalid="false"],
+:where(#mount) [type="radio"][aria-invalid="false"],
+:where(#mount) [type="radio"]:checked[aria-invalid="false"],
+:where(#mount) [type="checkbox"][role="switch"][aria-invalid="false"],
+:where(#mount) [type="checkbox"][role="switch"]:checked[aria-invalid="false"] {
+  --border-color: var(--form-element-valid-border-color);
+}
+:where(#mount) [type="checkbox"][aria-invalid="true"],
+:where(#mount) [type="checkbox"]:checked[aria-invalid="true"],
+:where(#mount) [type="radio"][aria-invalid="true"],
+:where(#mount) [type="radio"]:checked[aria-invalid="true"],
+:where(#mount) [type="checkbox"][role="switch"][aria-invalid="true"],
+:where(#mount) [type="checkbox"][role="switch"]:checked[aria-invalid="true"] {
+  --border-color: var(--form-element-invalid-border-color);
+}
+
+.text-black {
+  color: var(--text-black-2);
+}
+
+.text-gray-2 {
+  color: var(--text-gray-2);
+}
+
+.text-gray-6 {
+  color: var(--text-gray-6);
+}
+
+.text-gray-9 {
+  color: var(--text-gray-9);
+}
+
+.text-gray-c2 {
+  color: var(--text-gray-c2);
+}
+
+.pt-4 {
+  padding-top: 16px;
+}
+
+.p-2 {
+  padding: 8px;
+}
+
+.pl-5 {
+  padding-left: 48px;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.pl-2 {
+  padding-left: 8px;
+}
+
+.pl-4 {
+  padding-left: 24px;
+}
+
+.pt-2 {
+  padding-top: 8px;
+}
+
+.pb-2 {
+  padding-bottom: 8px;
+}
+
+.pb-4 {
+  padding-bottom: 16px;
+}
+
+.pb-5 {
+  padding-bottom: 20px;
+}
+
+.pr-5 {
+  padding-right: 48px;
+}
+
+.text-sm {
+  font-size: 13px;
+}
+
+.text-base {
+  font-size: 16px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mb-3 {
+  margin-bottom: 12px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.py-2 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.py-2-5 {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.mt-3 {
+  margin-top: 12px;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mt-5 {
+  margin-top: 20px;
+}
+
+.mt-6 {
+  margin-top: 24px;
+}
+
+.mb-1 {
+  margin-bottom: 4px;
+}
+
+.ml-4 {
+  margin-left: 24px;
+}
+
+.ml-3 {
+  margin-left: 16px;
+}
+
+.ml-2 {
+  margin-left: 8px;
+}
+
+.ml-1 {
+  margin-left: 4px;
+}
+
+.mr-1 {
+  margin-right: 4px;
+}
+
+.mr-2 {
+  margin-right: 8px;
+}
+
+.mr-3 {
+  margin-right: 16px;
+}
+
+.mx-2 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.pl-3 {
+  padding-left: 12px;
+}
+
+.pr-3 {
+  padding-right: 12px;
+}
+
+.p-3 {
+  padding: 12px;
+}
+
+.px-1 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.px-3 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.pt-3 {
+  padding-top: 12px;
+}
+
+.px-6 {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.px-4 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.pt-6 {
+  padding-top: 20px;
+}
+
+.py-3 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.left-auto {
+  left: auto !important;
+}
+
+.max-h-28 {
+  max-height: 112px;
+}
+
+.max-h-30 {
+  max-height: 120px;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.max-content {
+  width: max-content;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-baseline {
+  align-items: baseline;
+}
+
+.my-5 {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.my-4 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.my-3 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.pt-3 {
+  padding-top: 12px;
+}
+
+.px-3 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.pt-2 {
+  padding-top: 8px;
+}
+
+.px-2 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.pt-1 {
+  padding-top: 4px;
+}
+
+.px-1 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.pb-2 {
+  padding-bottom: 8px;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.close {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background-image: var(--icon-close);
+  background-position: center;
+  background-size: auto 1rem;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  transition: opacity var(--transition);
+}
+
+.padding-two-column {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.muted {
+  color: #999;
+}
+
+.text-label {
+  color: #666;
+}
+
+.display-none {
+  display: none;
+}
+
+/* dark use #18232c */
+@media (prefers-color-scheme: dark) {
+  .text-label {
+    color: #9ca3af;
+  }
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.text-decoration-none:is([aria-current], :hover, :active, :focus),
+[role="link"]:is([aria-current], :hover, :active, :focus) {
+  --text-decoration: none !important;
+  background-color: transparent !important;
+}
+
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.max-w-20 {
+  max-width: 180px;
+  white-space: nowrap;
+}
+
+[data-theme="light"],
+#mount:not([data-theme="dark"]) {
+  --popup-footer-background-color: #e8eaeb;
+  --popup-content-background-color: #ffffff;
+  --popup-item-background-color: #f3f5f6;
+  --popup-item-hover-background-color: #eaeced;
+  --popup-trial-pro-background-color: #f9fbfc;
+  --service-select-content-shadow: 0px 2px 12px 0px rgba(75, 76, 77, 0.2);
+  --service-select-border-color: #fafafa;
+  --service-select-selected-background-color: #f3f5f6;
+  --download-app-background: #f3f5f6;
+  --translate-language-background-color: #f3f5f6;
+  --translate-language-icon-color: #666666;
+  --translate-language-text-color: #222222;
+  --translate-language-hover-background-color: #fdedf3;
+  --translate-language-hover-icon-color: #e95d93;
+  --error-bg: #fdedf3;
+  --error-text: #222;
+  --error-link: #ea4c89;
+}
+
+[data-theme="dark"] {
+  --popup-footer-background-color: #0d0d0d;
+  --popup-content-background-color: #191919;
+  --popup-item-background-color: #272727;
+  --popup-item-hover-background-color: #333333;
+  --popup-trial-pro-background-color: #222222;
+  --service-select-content-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.9);
+  --service-select-border-color: #2c2c2c;
+  --service-select-selected-background-color: #333333;
+  --download-app-background: #333;
+  --translate-language-background-color: #2d2e2f;
+  --translate-language-icon-color: #b3b3b3;
+  --translate-language-text-color: #b3b3b3;
+  --translate-language-hover-background-color: #a97b8c;
+  --translate-language-hover-icon-color: rgba(255, 255, 255, 0.9);
+  --error-bg: #26171d;
+  --error-text: #dbdbdb;
+  --error-link: #ea4c89;
+}
+
+#mount {
+  min-width: 268px;
+}
+
+body {
+  padding: 0;
+  margin: 0 auto;
+  min-width: 268px;
+  border-radius: 10px;
+}
+
+.popup-container {
+  font-size: 16px;
+  --font-size: 16px;
+  color: #666;
+  background-color: var(--popup-footer-background-color);
+  width: 316px;
+  min-width: 316px;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-content {
+  background-color: var(--popup-content-background-color);
+  border-radius: 0px 0px 12px 12px;
+  padding: 16px 20px;
+}
+
+.popup-userscript-three-feature-layout {
+  background-color: var(--popup-footer-background-color);
+}
+
+.popup-userscript-three-feature-layout .popup-content {
+  padding-bottom: 20px;
+  border-radius: 0 0 12px 12px;
+}
+
+.popup-userscript-three-feature-layout .popup-footer {
+  border-radius: 0;
+}
+
+.immersive-translate-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  touch-action: none;
+}
+
+.immersive-translate-popup-wrapper {
+  background: var(--background-color);
+  border-radius: 10px;
+  border: 1px solid var(--muted-border-color);
+}
+
+.main-button {
+  font-size: 16px;
+  font-weight: 700;
+  vertical-align: middle;
+  border-radius: 12px;
+  padding: unset;
+  height: 48px;
+  line-height: 48px;
+  flex: 1;
+}
+
+select.translate-service,
+select.min-select {
+  --form-element-spacing-horizontal: 0;
+  margin-bottom: 0px;
+  max-width: unset;
+  flex: 1;
+  overflow: hidden;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  padding-right: 30px;
+  padding-left: 0px;
+  background-position: center right 12px;
+  background-size: 16px auto;
+  background-image: var(--icon-xia);
+  text-overflow: ellipsis;
+  color: var(--text-gray-2);
+  background-color: transparent;
+  box-shadow: unset !important;
+  cursor: pointer;
+}
+
+select.more {
+  background-position: center right;
+  padding-right: 20px;
+}
+
+select.translate-service {
+  color: var(--text-black-2);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSI4IiB2aWV3Qm94PSIwIDAgOCA4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIG9wYWNpdHk9IjAuOCI+PHBhdGggZD0iTTMuNDc5NzMgNi4zODY0M0wwLjcyOTI5NyAzLjMyMjE2QzAuNjE2ODggMy4xOTY5NCAwLjU1NDY5NSAzLjAzNDU5IDAuNTU0Njg4IDIuODY2M0MwLjU1NDY4OCAyLjQ4OTI0IDAuODYwNTQ3IDIuMTgzNTkgMS4yMzc4NCAyLjE4MzU5SDYuNzM4NzFDNi45MDcwNyAyLjE4MzU4IDcuMDY5NTEgMi4yNDU3MiA3LjE5NDg4IDIuMzU4MDlDNy40NzU3NCAyLjYwOTg2IDcuNDk5MTkgMy4wNDE0OCA3LjI0NzI2IDMuMzIyMTZMNC40OTY4MiA2LjM4NjQ0QzQuNDgwMzIgNi40MDQ4MiA0LjQ2MjgzIDYuNDIyMjkgNC40NDQ0NCA2LjQzODc4QzQuMTYzNTggNi42OTA1NSAzLjczMTY2IDYuNjY3MTEgMy40Nzk3MyA2LjM4NjQzWiIgZmlsbD0iIzk5OTk5OSIvPjwvZz48L3N2Zz4K");
+  background-size: 8px auto;
+}
+
+.min-select-container.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.popup-footer {
+  background-color: var(--popup-footer-background-color);
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* Footer 三栏布局样式 */
+.footer-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  min-width: 72px;
+}
+
+.footer-icon-btn {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-icon-btn svg {
+  color: #999999;
+}
+
+[data-theme="dark"] .footer-icon-btn svg {
+  color: #707070;
+}
+
+.footer-link-text {
+  font-size: 12px;
+  line-height: 18px;
+  color: #666666;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .footer-link-text {
+  color: #b3b3b3;
+}
+
+.footer-link-btn-right {
+  justify-content: flex-end;
+}
+
+.footer-center-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #999999;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.footer-center-text.is-overflowing {
+  justify-content: flex-start;
+}
+
+.footer-center-text.is-overflowing .footer-center-content {
+  animation: footer-scroll-text 12s linear infinite;
+}
+
+@keyframes footer-scroll-text {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.footer-center-content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-scroll-gap {
+  display: inline-block;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .footer-center-text {
+  color: #707070;
+}
+
+.footer-text-content {
+  display: inline-block;
+}
+
+.footer-privacy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-version-inline-text {
+  font-size: 12px;
+  color: #999999;
+  line-height: 1;
+  border-bottom: 1px solid transparent;
+}
+
+[data-theme="dark"] .footer-version-inline-text {
+  color: #707070;
+}
+
+.footer-version-inline-text:hover {
+  border-bottom-color: #999999;
+}
+
+[data-theme="dark"] .footer-version-inline-text:hover {
+  border-bottom-color: #707070;
+}
+
+.translate-language-row {
+  gap: 4px;
+}
+
+.translate-language-exchange {
+  width: 36px;
+  height: 48px;
+  background-color: var(--translate-language-background-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--translate-language-icon-color);
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.translate-language-exchange:hover {
+  color: var(--translate-language-hover-icon-color);
+}
+
+.translate-language-exchange-active {
+  background-color: var(--translate-language-hover-background-color);
+  color: var(--translate-language-hover-icon-color);
+}
+
+.translate-language-exchange-active:hover {
+  background-color: var(--translate-language-hover-background-color);
+  color: var(--translate-language-hover-icon-color);
+}
+
+.translate-language-arrow {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+.translation-service-container {
+  background-color: var(--popup-item-background-color);
+  border-radius: 12px;
+}
+
+.translation-service-primary-field {
+  position: relative;
+}
+
+.translation-service-guide-hitbox {
+  position: absolute;
+  right: 46px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: auto;
+}
+
+.min-select-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+  background-color: var(--popup-item-background-color);
+  padding-left: 16px;
+}
+
+.min-select-container:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.min-select-container:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.min-select-container:only-child {
+  border-radius: 10px;
+}
+
+.popup-ai-context-label {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  min-width: 60px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.popup-ai-context-switch {
+  align-self: center;
+  margin: 0;
+  margin-inline-end: 12px;
+}
+
+.translate-mode {
+  width: 36px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--translate-language-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: var(--translate-language-text-color);
+  margin-right: 8px;
+}
+
+/* 快捷操作设置标题栏 */
+.widgets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.widgets-header-title {
+  color: #999999;
+}
+
+.widgets-header-action {
+  color: #999999;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.widgets-header-action:hover {
+  color: #666666;
+}
+
+.widgets-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.popup-userscript-three-feature-layout .widgets-container-compact-monkey {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.popup-userscript-three-feature-layout .widgets-container-compact-monkey.widgets-four-items {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.widgets-container.widgets-single-item {
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 12px;
+}
+
+.widgets-container.widgets-single-item .widget-item {
+  max-width: none;
+}
+
+/* 当只有两个小组件时的样式优化 */
+.widgets-container.widgets-two-items {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.widgets-container.widgets-two-items .widget-item {
+  max-width: none;
+}
+
+.widget-item {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid #eef0f2;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 0 14px;
+  text-align: left;
+  gap: 6px;
+}
+
+.widget-item.widget-item-single {
+  flex: 1 1 auto;
+  flex-direction: row;
+  justify-content: center;
+  border: 1px solid #eef0f2;
+  border-radius: 16px;
+  padding: 0 14px;
+  background: transparent;
+}
+
+.popup-userscript-three-feature-layout .widget-item-compact {
+  min-height: 44px;
+  flex-direction: row;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+}
+
+.widget-item svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.widget-icon-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--c-66, #666666);
+  font-size: 14px;
+  line-height: 21px;
+  text-align: left;
+  word-break: keep-all;
+}
+
+.popup-userscript-three-feature-layout .widget-item-compact .widget-icon-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: left;
+}
+
+.widget-item.widget-item-single .widget-icon-text {
+  white-space: nowrap;
+  text-align: left;
+  color: var(--c-66, #666666);
+}
+
+[data-theme="dark"] .widget-item,
+[data-theme="dark"] .widget-item.widget-item-single {
+  border-color: #2e2e2e;
+}
+
+[data-theme="dark"] .widget-icon-text,
+[data-theme="dark"] .widget-item.widget-item-single .widget-icon-text {
+  color: var(--c-66, #666666);
+}
+
+[data-theme="dark"] .more-settings-icon {
+  fill: #191919;
+}
+
+.share-button-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 2px 3px 0 8px;
+}
+
+.share-button-container svg {
+  fill: var(--text-gray-9);
+}
+
+.min-select-container:hover,
+.widget-item:hover {
+  background-color: var(--popup-item-hover-background-color);
+}
+
+.main-button:hover {
+  background-color: #f5508f;
+}
+
+.share-button-container:hover {
+  background-color: var(--popup-item-background-color);
+  border-radius: 6px;
+}
+
+.error-boundary {
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+  display: flex;
+  padding: 12px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  word-break: break-all;
+  margin: 12px;
+  border-radius: 12px;
+  flex-direction: column;
+}
+
+.upgrade-pro {
+  border-radius: 11px;
+  background: linear-gradient(57deg, #272727 19.8%, #696969 82.2%);
+  padding: 2px 8px;
+  transform: scale(0.85);
+}
+
+.upgrade-pro span {
+  background: linear-gradient(180deg, #ffeab4 17.65%, #f8c235 85.29%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.upgrade-pro svg {
+  margin-top: -2px;
+}
+
+.upgrade-pro:hover {
+  background: linear-gradient(57deg, #3d3d3d 19.8%, #949494 82.2%);
+}
+
+.border-bottom-radius-0 {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.trial-pro-container {
+  border-radius: 0px 0px 12px 12px;
+  background: var(--popup-trial-pro-background-color);
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding-left: 16px;
+  padding-right: 12px;
+  font-size: 12px;
+}
+
+.trial-pro-container label {
+  line-height: 13px;
+  color: var(--text-black-2);
+}
+
+.trial-pro-container img {
+  margin-left: 5px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.upgrade-pro-discount-act {
+  height: 25px;
+  display: flex;
+  padding: 0 4px;
+  align-items: center;
+  border-radius: 15px;
+  background: linear-gradient(
+    90deg,
+    #cefbfa 11.33%,
+    #d7f56f 63.75%,
+    #fccd5e 100%
+  );
+  transform: scale(0.9);
+  box-shadow: 0px 1.8px 3.6px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.upgrade-pro-discount-act span {
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 4px;
+  color: #222222;
+}
+
+.upgrade-pro-discount-act:hover {
+  text-decoration: unset;
+  background: linear-gradient(
+    90deg,
+    #e2fffe 11.33%,
+    #e6ff91 63.75%,
+    #ffdf93 100%
+  );
+}
+
+.custom-select-container {
+  width: 200px;
+  position: relative;
+  flex: 1;
+}
+
+#translation-service-select {
+  padding-right: 12px;
+}
+
+.custom-select-content {
+  border-radius: 12px;
+  background: var(--popup-content-background-color);
+  box-shadow: var(--service-select-content-shadow);
+  border: 1px solid var(--service-select-border-color);
+  padding: 8px;
+  position: absolute;
+  left: -68px;
+  right: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.custom-select-item.default {
+  width: 100%;
+  padding: 0;
+}
+
+.custom-select-item {
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-black-2);
+  width: auto;
+  overflow: hidden;
+  height: 30px;
+  line-height: 30px;
+}
+
+.custom-select-item-img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .custom-select-item-img {
+    margin-right: 6px;
+  }
+}
+
+.custom-select-content .custom-select-item.selected,
+.custom-select-content .custom-select-item:hover {
+  background: var(--service-select-selected-background-color);
+}
+
+.custom-select-item > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-select-item-pro {
+  font-size: 12px;
+  margin-left: 6px;
+  display: flex;
+}
+
+.custom-select-item-pro img {
+  margin: 0 3px;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.service-select-inline-sponsor-container {
+  width: 50px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.service-select-inline-sponsor-marquee {
+  min-width: max-content;
+  display: inline-flex;
+  align-items: center;
+  column-gap: 12px;
+  animation: service-select-inline-sponsor-scroll 10s linear infinite;
+}
+
+.service-select-inline-sponsor-track {
+  min-width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+@keyframes service-select-inline-sponsor-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 6px));
+  }
+}
+
+.custom-select-group-header {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-gray-9);
+  padding: 8px 8px 6px;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.custom-select-group-header--recommendation {
+  padding-top: 4px;
+}
+
+.custom-select-group-header-tip {
+  display: inline-flex;
+  align-items: center;
+  color: #bcbcbc;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.more-container {
+  position: relative;
+}
+
+.new-menu-indicator {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ef3434;
+  border-radius: 50%;
+  right: 18px;
+  top: 4px;
+}
+
+.download-app {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  background: var(--download-app-background);
+  padding: 4px 8px;
+  color: var(--text-gray-6);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Popup 动画效果 */
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popup-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+}
+
+.popup-generic-content {
+  animation: popup-fade-in 0.2s ease-out;
+}
+
+.popup-generic-content.hiding {
+  animation: popup-fade-out 0.15s ease-in;
+}
+
+select.min-select {
+  --form-element-spacing-horizontal: 0;
+  max-width: 128px;
+  overflow: hidden;
+  color: var(--primary);
+  font-size: 13px;
+  border: none;
+  padding: 0;
+  padding-right: 20px;
+  text-overflow: ellipsis;
+  color: var(--color);
+}
+select.min-select-secondary {
+  color: var(--color);
+}
+select.min-select:focus {
+  outline: none;
+  border: none;
+  --box-shadow: none;
+}
+
+select.min-select-left {
+  padding-right: 0px;
+  /* padding-left: 24px; */
+  /* background-position: center left 0; */
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+select.transform-padding-left {
+  padding-left: 12px;
+  transform: translateX(-12px);
+  background-position: center right 0px;
+}
+
+select.text-gray-6 {
+  color: var(--text-gray-6);
+}
+
+/* dark use black, for windows */
+@media (prefers-color-scheme: dark) {
+  select.translate-service option,
+  select.min-select option {
+    background-color: #666666;
+  }
+}
+
+select.min-select-no-arrow {
+  background-image: none;
+  padding-right: 0;
+}
+
+.activity-tips {
+  border-radius: 8px;
+  padding: 0px 8px;
+  height: 26px;
+  background: linear-gradient(
+    83deg,
+    #faccde -0.87%,
+    #fce7ef 43.13%,
+    #fbd6e4 72.08%,
+    #ffb3d1 96.34%
+  );
+  color: #333;
+  cursor: pointer;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.activity-tips-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.countdown-container {
+  min-width: 50px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}
+
+.activity-tips-text {
+  font-weight: 600;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 非会员升级提示 */
+.upgrade-tips {
+  padding: 0px 6px 0px 4px;
+  height: 18px;
+  color: #ea4c89;
+  cursor: pointer;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.upgrade-tips svg:first-child {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  filter: drop-shadow(0px 4px 4px rgba(236, 76, 140, 0.2));
+}
+
+.upgrade-tips-text {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.upgrade-tips-switch {
+  position: relative;
+  width: 30px;
+  height: 18px;
+  border-radius: 24px;
+  background: #cccccc;
+  flex-shrink: 0;
+}
+
+.upgrade-tips-switch-thumb {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* 抽屉组件样式 */
+.drawer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.drawer-overlay.drawer-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.drawer-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  border-radius: 12px 12px 0 0;
+  z-index: 101;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-visible .drawer-panel {
+  transform: translateY(0);
+}
+
+[data-theme="dark"] .drawer-panel {
+  background: #222222;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  flex-shrink: 0;
+}
+
+.drawer-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+}
+
+[data-theme="dark"] .drawer-title {
+  color: #e0e0e0;
+}
+
+.drawer-close {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999999;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.drawer-close:hover {
+  background-color: #f3f5f6;
+}
+
+[data-theme="dark"] .drawer-close:hover {
+  background-color: #333333;
+}
+
+.drawer-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.drawer-body.drawer-body-hover {
+  padding: 0 20px 20px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.drawer-body.drawer-body-more-settings {
+  padding-top: 0;
+}
+
+.drawer-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #eef0f2;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+[data-theme="dark"] .drawer-footer {
+  border-top: 1px solid #2e2e2e;
+}
+
+.drawer-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.drawer-footer-actions-single {
+  justify-content: center;
+}
+
+.drawer-footer-text {
+  font-size: 12px;
+  cursor: pointer;
+  color: #999999;
+  text-decoration: none;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.drawer-footer-actions-single .drawer-footer-text {
+  flex: 0 1 auto;
+  max-width: 100%;
+}
+
+.drawer-footer-text:hover {
+  text-decoration: underline;
+}
+
+/* 抽屉内容区域样式 */
+.drawer-section {
+  margin-bottom: 16px;
+}
+
+.drawer-section:last-child {
+  margin-bottom: 0;
+}
+
+.drawer-section-highlight {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+[data-theme="dark"] .drawer-section-highlight {
+  background-color: #2a2a2a;
+}
+
+.drawer-section-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666666;
+  margin-bottom: 12px;
+}
+
+[data-theme="dark"] .drawer-section-title {
+  color: #999999;
+}
+
+.drawer-section-divider {
+  height: 1px;
+  background-color: #eef0f2;
+  margin: 16px 0;
+}
+
+/* ========== 通用抽屉组件样式 ========== */
+.popup-drawer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.popup-drawer-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  background: #f3f5f6;
+}
+
+[data-theme="dark"] .popup-drawer-tabs {
+  background: #2a2a2a;
+}
+
+.popup-drawer-tabs button {
+  height: 30px;
+  border: 0;
+  border-radius: 6px;
+  color: #666666;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.popup-drawer-tabs button.active {
+  color: #222222;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .popup-drawer-tabs button {
+  color: #b3b3b3;
+}
+
+[data-theme="dark"] .popup-drawer-tabs button.active {
+  color: #f3f3f3;
+  background: #1f1f1f;
+}
+
+.popup-drawer-card {
+  background: #f3f5f6;
+  border-radius: 12px;
+  padding: 12px 12px 16px;
+}
+
+[data-theme="dark"] .popup-drawer-card {
+  background: #2a2a2a;
+}
+
+.popup-drawer-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 21px;
+  gap: 12px;
+}
+
+.popup-drawer-card-header input[type="checkbox"][role="switch"] {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.popup-drawer-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222222;
+  line-height: 21px;
+}
+
+.popup-drawer-card-title-row {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: 6px;
+}
+
+.popup-drawer-premium-icon {
+  width: 24px;
+  height: 12px;
+  flex: 0 0 auto;
+}
+
+[data-theme="dark"] .popup-drawer-card-title {
+  color: #e0e0e0;
+}
+
+.popup-drawer-card-description {
+  margin-top: 10px;
+  color: #777777;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.popup-drawer-card-description-tip {
+  margin-top: 4px;
+  color: #d46b08;
+}
+
+[data-theme="dark"] .popup-drawer-card-description {
+  color: #a5a5a5;
+}
+
+[data-theme="dark"] .popup-drawer-card-description-tip {
+  color: #f6ad55;
+}
+
+.popup-drawer-card-divider {
+  height: 1px;
+  width: calc(100% + 24px);
+  background-color: #ffffff;
+  margin: 12px -12px 16px;
+}
+
+[data-theme="dark"] .popup-drawer-card-divider {
+  background-color: #333333;
+}
+
+.popup-drawer-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.popup-drawer-demo-region-fixed {
+  height: 51px;
+  max-height: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-drawer-demo-region-min {
+  min-height: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-drawer-demo-selection {
+  width: 100%;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.popup-drawer-demo-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-drawer-demo-plus,
+.popup-drawer-demo-equal {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  color: #333333;
+}
+
+[data-theme="dark"] .popup-drawer-demo-plus,
+[data-theme="dark"] .popup-drawer-demo-equal {
+  color: #e0e0e0;
+}
+
+.popup-drawer-demo-logo {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-drawer-demo-logo img {
+  width: 28px;
+  height: 28px;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(255, 166, 201, 0.5));
+}
+
+.popup-drawer-demo-lasso {
+  width: 38px;
+  height: 24px;
+  border: 3px solid #ea4c89;
+  border-right-color: transparent;
+  border-radius: 52% 48% 50% 46%;
+  transform: rotate(-10deg);
+  box-shadow: 0 4px 12px rgba(255, 166, 201, 0.5);
+  box-sizing: border-box;
+}
+
+.popup-drawer-demo-result {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #333333;
+}
+
+.popup-drawer-demo-result-ellipsis {
+  min-width: 0;
+  max-width: calc(100% - 72px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .popup-drawer-demo-result {
+  color: #e0e0e0;
+}
+
+.popup-drawer-trigger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.popup-drawer-trigger-label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #999999;
+  padding-left: 4px;
+}
+
+.popup-drawer-trigger-options {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.popup-drawer-trigger-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #eef0f2;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #333333;
+  background: #ffffff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.popup-drawer-trigger-option-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.popup-drawer-trigger-option:not(.popup-drawer-trigger-option-selected):hover {
+  border-color: #d0d3d6;
+}
+
+.popup-drawer-trigger-option-selected {
+  border: 0.5px solid #ea4c89;
+  background: #fdedf3;
+  box-shadow: 0px 4px 12px rgba(255, 166, 201, 0.5);
+}
+
+[data-theme="dark"] .popup-drawer-trigger-option {
+  background: #1f1f1f;
+  border-color: #333333;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"]
+  .popup-drawer-trigger-option:not(
+    .popup-drawer-trigger-option-selected
+  ):hover {
+  border-color: #444444;
+}
+
+[data-theme="dark"] .popup-drawer-trigger-option-selected {
+  background: rgba(233, 76, 137, 0.2);
+  border-color: #ea4c89;
+  box-shadow: 0 4px 12px 0 rgba(255, 166, 201, 0.3);
+}
+
+.popup-drawer-trigger-option-with-icon {
+  gap: 8px;
+}
+
+/* ========== 通用抽屉演示区域样式 ========== */
+/* 键帽样式 */
+.popup-drawer-demo-keycap {
+  min-width: 72px;
+  padding: 9px;
+  height: auto;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      60px 36px at 85% 100%,
+      rgba(208, 208, 208, 0.2),
+      rgba(255, 255, 255, 0)
+    ),
+    radial-gradient(72px 36px at 50% 0%, #101010 0%, #242424 100%);
+  box-shadow:
+    2px 2px 3.5px rgba(0, 0, 0, 0.4),
+    inset 0.5px 0.7px 0.4px rgba(255, 255, 255, 0.5),
+    inset -0.5px -0.5px 0.2px rgba(0, 0, 0, 0.6);
+}
+
+.popup-drawer-demo-keycap-text {
+  max-width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 小圆点样式 */
+.popup-drawer-demo-mini-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ea4c89;
+  flex-shrink: 0;
+  align-self: center;
+  box-shadow: 0 4px 12px rgba(255, 166, 201, 0.5);
+}
+
+[data-theme="dark"] .drawer-section-divider {
+  background-color: #333333;
+}
+
+/* 开关行 */
+.drawer-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.drawer-switch-row.drawer-row-border {
+  border-bottom: 1px solid #eef0f2;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+}
+
+[data-theme="dark"] .drawer-switch-row.drawer-row-border {
+  border-bottom-color: #333333;
+}
+
+.drawer-switch-label {
+  font-size: 14px;
+  color: #222222;
+}
+
+[data-theme="dark"] .drawer-switch-label {
+  color: #e0e0e0;
+}
+
+/* 链接行 */
+.drawer-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #eef0f2;
+  font-size: 14px;
+  color: #222222;
+}
+
+.drawer-link-row:last-child {
+  border-bottom: none;
+}
+
+[data-theme="dark"] .drawer-link-row {
+  border-bottom-color: #333333;
+  color: #e0e0e0;
+}
+
+.drawer-link-row:hover {
+  color: #ea4c89;
+}
+
+/* 演示区域 */
+.drawer-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.drawer-demo-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #eef0f2;
+}
+
+[data-theme="dark"] .drawer-demo-icon {
+  background-color: #333333;
+  border-color: #444444;
+}
+
+.drawer-demo-plus,
+.drawer-demo-equal {
+  font-size: 16px;
+  color: #999999;
+}
+
+.drawer-demo-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.drawer-demo-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drawer-demo-result {
+  font-size: 14px;
+  color: #222222;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #eef0f2;
+}
+
+[data-theme="dark"] .drawer-demo-result {
+  background-color: #333333;
+  border-color: #444444;
+  color: #e0e0e0;
+}
+
+/* 触发方式选项 */
+.drawer-options {
+  display: flex;
+  gap: 8px;
+}
+
+.drawer-options-wrap {
+  flex-wrap: wrap;
+}
+
+.drawer-option {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #666666;
+  background-color: #f3f5f6;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .drawer-option {
+  background-color: #333333;
+  color: #b3b3b3;
+}
+
+.drawer-option:hover {
+  background-color: #eaeced;
+}
+
+[data-theme="dark"] .drawer-option:hover {
+  background-color: #3a3a3a;
+}
+
+.drawer-option-selected {
+  border-color: #ea4c89;
+  background-color: #fdedf3;
+  color: #ea4c89;
+  box-shadow: 0px 4px 12px rgba(255, 166, 201, 0.5);
+}
+
+[data-theme="dark"] .drawer-option-selected {
+  background-color: rgba(234, 76, 137, 0.2);
+}
+
+.drawer-body.drawer-body-selection {
+  padding: 0 20px 20px 20px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+/* ========== 更多设置抽屉样式 ========== */
+.more-settings-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.more-settings-quick-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.more-settings-feature-card {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #f3f5f6;
+  transition: background-color 0.2s ease;
+}
+
+.more-settings-feature-card:hover {
+  background-color: #e8eaec;
+}
+
+.more-settings-feature-card:active {
+  background-color: #dde0e2;
+}
+
+.more-settings-feature-card-label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #666666;
+  white-space: nowrap;
+}
+
+.more-settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.more-settings-switch-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 21px;
+  gap: 12px;
+}
+
+.more-settings-switch-label {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #222222;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.more-settings-switch-row input[type="checkbox"] {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+[data-theme="dark"] .more-settings-switch-label {
+  color: #e0e0e0;
+}
+
+.more-settings-cache-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.more-settings-cache-size {
+  color: #999999;
+}
+
+.more-settings-cache-clean-link {
+  color: #ea4c89;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.more-settings-cache-clean-link:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .more-settings-cache-size {
+  color: #8a8a8a;
+}
+
+[data-theme="dark"] .more-settings-feature-card {
+  background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .more-settings-feature-card:hover {
+  background-color: #333333;
+}
+
+[data-theme="dark"] .more-settings-feature-card:active {
+  background-color: #3a3a3a;
+}
+
+[data-theme="dark"] .more-settings-feature-card-label {
+  color: #e0e0e0;
+}
+
+/* 动作按钮样式 */
+.more-settings-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  color: #222222;
+  background-color: #f3f5f6;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.more-settings-action-button:hover {
+  background-color: #e8eaec;
+}
+
+.more-settings-action-button:active {
+  background-color: #dde0e2;
+}
+
+.more-settings-action-button-label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  color: inherit;
+  text-align: center;
+}
+
+[data-theme="dark"] .more-settings-action-button {
+  color: #e0e0e0;
+  background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .more-settings-action-button:hover {
+  background-color: #333333;
+}
+
+[data-theme="dark"] .more-settings-action-button:active {
+  background-color: #3a3a3a;
+}
+
+[data-theme="dark"] .more-settings-action-button-label {
+  color: #e0e0e0;
+}
+
+/* 错误消息组件样式 */
+.error-message-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 16px;
+  margin-top: 6px;
+  margin-bottom: -14px;
+  border: 1px solid #f53f3f;
+  border-radius: 12px;
+  background-color: var(--error-bg);
+}
+
+.error-message-icon-wrapper {
+  width: 21px;
+  height: 21px;
+  min-width: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}
+
+.error-message-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f53f3f;
+}
+
+.error-message-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--error-text);
+}
+
+.error-message-text a {
+  color: var(--error-link);
+  text-decoration: underline;
+}
+
+.ad-banner-container {
+  margin-top: 10px;
+  margin-bottom: -5px;
+}
+
+html {
+  font-size: 17px;
+}
+
+@media print {
+  .imt-fb-container {
+    display: none !important;
+  }
+}
+
+#mount {
+  position: absolute;
+  display: none;
+  min-width: 250px;
+  height: auto;
+  --font-size: 17px;
+  font-size: 17px;
+}
+
+/* float-ball */
+.imt-fb-container {
+  position: fixed;
+  padding: 0;
+  top: 335px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  display: none;
+  direction: ltr;
+  background-color: transparent !important;
+}
+
+.imt-fb-container.active .imt-manga-button {
+  opacity: 1;
+}
+
+.imt-fb-container.left {
+  align-items: flex-start;
+  left: 0;
+}
+
+.imt-fb-container.right {
+  align-items: flex-end;
+  right: 0;
+}
+
+.imt-fb-btn {
+  cursor: pointer;
+  background: var(--float-ball-more-button-background-color);
+  height: 36px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+}
+
+.imt-fb-btn.left {
+  border-top-right-radius: 36px;
+  border-bottom-right-radius: 36px;
+  padding-left: 3px;
+}
+
+.imt-fb-btn.right {
+  border-top-left-radius: 36px;
+  border-bottom-left-radius: 36px;
+  padding-right: 3px;
+}
+
+.imt-fb-btn.mini.left {
+  transform: translateX(-22px);
+}
+
+.imt-fb-btn.mini.right {
+  transform: translateX(22px);
+}
+
+.imt-fb-btn.mini.active {
+  transform: translateX(0);
+}
+
+.imt-fb-btn div {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.imt-fb-btn .imt-fb-hit-area {
+  position: absolute;
+  top: 0;
+  height: 36px;
+  bottom: -6px;
+  left: -6px;
+  right: -6px;
+  background: transparent;
+}
+
+.imt-fb-btn.mini.right .imt-fb-hit-area {
+  left: -10px;
+}
+
+.imt-fb-btn.mini.left .imt-fb-hit-area {
+  right: -10px;
+}
+
+.imt-fb-btn.left div {
+  border-top-right-radius: 34px;
+  border-bottom-right-radius: 34px;
+  justify-content: flex-end;
+}
+
+.imt-fb-btn.right div {
+  border-top-left-radius: 34px;
+  border-bottom-left-radius: 34px;
+}
+
+.imt-fb-logo-img {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+
+.imt-fb-logo-img-big-bg {
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  background-color: #ed6d8f;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.imt-float-ball-translated {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  bottom: 4px;
+  right: 4px;
+}
+
+.btn-animate {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition:
+    opacity ease-out 250ms,
+    -webkit-transform ease-out 250ms;
+  transition:
+    opacity ease-out 250ms,
+    -webkit-transform ease-out 250ms;
+  transition:
+    opacity ease-out 250ms,
+    transform ease-out 250ms;
+  transition:
+    opacity ease-out 250ms,
+    transform ease-out 250ms,
+    -webkit-transform ease-out 250ms;
+}
+
+.imt-fb-setting-btn {
+  margin-right: 18px;
+  width: 28px;
+  height: 28px;
+}
+
+.immersive-translate-popup-wrapper {
+  background: var(--background-color);
+  border-radius: 20px;
+  box-shadow: 2px 10px 24px 0px #0e121614;
+  border: none;
+}
+
+.popup-container {
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-content {
+  border-radius: 20px 20px 12px 12px;
+}
+.popup-footer {
+  border-radius: 20px;
+}
+
+.popup-userscript-three-feature-layout {
+  border-radius: 20px;
+}
+
+.popup-userscript-three-feature-layout .popup-content {
+  border-radius: 20px 20px 12px 12px;
+}
+
+.popup-userscript-three-feature-layout .popup-footer {
+  border-radius: 0;
+}
+
+.imt-fb-close-button {
+  cursor: pointer;
+  position: absolute;
+  left: -10px;
+  bottom: -20px;
+}
+.imt-fb-container.left .imt-fb-close-button {
+  left: auto;
+  right: -10px;
+}
+
+.imt-fb-close-content {
+  padding: 22px;
+  width: 320px;
+  pointer-events: all;
+}
+
+.imt-fb-close-title {
+  font-weight: 500;
+  color: var(--text-black-2);
+}
+
+.imt-fb-close-radio-content {
+  background-color: var(--background-light-green);
+  padding: 8px 20px;
+}
+
+.imt-fb-radio-sel,
+.imt-fb-radio-nor {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.imt-fb-radio-sel {
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imt-fb-radio-sel div {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--primary);
+}
+
+.imt-fb-radio-nor {
+  border: 2px solid var(--input-border-strong);
+}
+
+.imt-fb-primary-btn {
+  background-color: var(--primary);
+  width: 72px;
+  height: 32px;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.imt-fb-default-btn {
+  border: 1px solid var(--primary);
+  width: 72px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--primary);
+  line-height: 32px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.imt-fb-guide-container {
+  width: 312px;
+  transform: translateY(-45%);
+}
+
+.imt-fb-guide-bg {
+  position: absolute;
+  left: 30px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 100%;
+  width: 90%;
+}
+
+.imt-fb-guide-bg.left {
+  transform: scaleX(-1);
+}
+
+.imt-fb-guide-content {
+  margin: 16px -30px 80px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imt-fb-guide-content.left {
+  margin: 16px 21px 60px 32px;
+}
+
+.imt-fb-guide-img {
+  width: 220px;
+  height: 112px;
+}
+
+.imt-fb-guide-message {
+  font-size: 14px;
+  line-height: 28px;
+  color: #333333;
+  white-space: pre-wrap;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.imt-manga-guide-message {
+  font-size: 16px;
+  line-height: 24px;
+  color: #333333;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.imt-fb-guide-button {
+  margin-top: 16px;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 20px;
+  width: unset;
+}
+
+.imt-fb-side {
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+  position: relative;
+}
+
+.imt-fb-side {
+  margin: 10px 0;
+}
+
+.imt-fb-side::before,
+.imt-manga-button::before,
+.imt-fb-round-button::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.imt-fb-side:hover::before,
+.imt-manga-button:hover::before,
+.imt-fb-round-button:hover::before {
+  background-color: var(--float-ball-more-button-hover-color);
+}
+
+.imt-fb-new-badge {
+  width: 26px;
+  height: 14px;
+  padding: 3px;
+  background-color: #f53f3f;
+  border-radius: 4px;
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imt-fb-side * {
+  pointer-events: all;
+}
+
+.imt-fb-pin-icon {
+  position: absolute;
+  left: -16px;
+  bottom: -12px;
+  opacity: 0;
+  cursor: pointer;
+}
+.imt-fb-container.left .imt-fb-pin-icon {
+  left: auto;
+  right: -16px;
+}
+
+.imt-fb-side:hover .imt-fb-pin-icon {
+  opacity: 1;
+}
+
+.imt-fb-more-button {
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+/* Sheet.css */
+.immersive-translate-sheet {
+  position: fixed;
+  transform: translateY(100%);
+  /* Start off screen */
+  left: 0;
+  right: 0;
+  background-color: var(--background-color);
+  transition: transform 0.3s ease-out;
+  /* Smooth slide transition */
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  /* Ensure it's above other content */
+  bottom: 0;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  overflow: hidden;
+}
+
+.immersive-translate-sheet.visible {
+  transform: translateY(0);
+}
+
+.immersive-translate-sheet-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.immersive-translate-sheet-backdrop.visible {
+  opacity: 1;
+}
+
+.popup-container-sheet {
+  max-width: 100vw;
+  width: 100vw;
+}
+
+.imt-no-events svg * {
+  pointer-events: none !important;
+}
+
+.imt-manga-button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: all;
+  margin: 0 0 10px 0;
+  background-color: var(--float-ball-more-button-background-color);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
+  right: 8px;
+}
+
+.imt-manga-feedback {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.imt-fb-round-button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--float-ball-more-button-background-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.imt-fb-round-button > svg {
+  z-index: 1;
+}
+
+.imt-fb-upgrade-button {
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.imt-fb-power-user-card {
+  position: absolute;
+  bottom: -130px;
+  width: 266px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 2px 10px 24px 0 rgba(14, 18, 22, 0.08);
+  border: 1px solid rgba(250, 251, 251, 1);
+  pointer-events: all;
+  z-index: 2;
+  background: linear-gradient(172deg, rgba(255, 255, 255, 0.30) 4.36%, #FFF 35.98%), linear-gradient(0deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.40) 100%), radial-gradient(39.95% 47.41% at -0.53% 55.22%, #E0C4F7 0%, rgba(224, 196, 247, 0.00) 100%), radial-gradient(56.37% 54.27% at 86.17% 0%, #E0C4F6 0%, rgba(224, 196, 246, 0.00) 100%), radial-gradient(42.04% 37.43% at -0.53% 3.75%, #AED5FF 0%, rgba(174, 213, 255, 0.00) 100%), radial-gradient(66.88% 52.09% at 36.81% 19.55%, #757ED8 0%, #6B6AC0 100%), #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imt-fb-power-user-card.right {
+  right: 60px;
+}
+
+.imt-fb-power-user-card.right::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 130px;
+  border-width: 10px 0 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+  filter: drop-shadow(2px 0 2px rgba(14, 18, 22, 0.06));
+}
+
+.imt-fb-power-user-card.left {
+  left: 60px;
+}
+
+.imt-fb-power-user-card.left::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 130px;
+  border-width: 10px 10px 10px 0;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+  filter: drop-shadow(-2px 0 2px rgba(14, 18, 22, 0.06));
+}
+
+.imt-fb-power-user-card-banner {
+  display: block;
+  width: 128px;
+  height: auto;
+  margin-top: 8px;
+  border-radius: 8px 8px 0 0;
+}
+
+.imt-fb-power-user-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 24px 0;
+  box-sizing: border-box;
+}
+
+.imt-fb-power-user-card-title {
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+
+.imt-fb-power-user-card-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.imt-fb-power-user-card-body {
+  padding: 12px 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.imt-fb-power-user-card-desc {
+  color: #333;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.imt-fb-power-user-card-primary {
+  margin-top: 16px;
+  height: 37px;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #F497BC 17.37%, #EC4C8C 89.68%);
+  color: var(--ZX-FFFFFF, #FFF);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px; /* 150% */
+  display: flex;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex: 1 0 0;
+}
+
+.imt-manga-translated {
+  position: absolute;
+  left: 24px;
+  top: 20px;
+}
+
+.imt-float-ball-loading {
+  animation: imt-loading-animation 0.6s infinite linear !important;
+}
+
+.imt-manga-guide-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 100%;
+  transform: translateY(-50%);
+}
+.imt-manga-guide-content {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  margin: 0 40px 0;
+}
+
+.img-manga-guide-button {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.img-manga-close {
+  position: absolute;
+  bottom: -200px;
+  width: 32px;
+  height: 32px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  cursor: pointer;
+}
+
+.imt-fb-container.dragging .imt-manga-button,
+.imt-fb-container.dragging .btn-animate:not(.imt-fb-btn) {
+  display: none !important;
+}
+
+.imt-fb-container.dragging .imt-fb-btn {
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  cursor: move !important;
+}
+
+.imt-fb-container.dragging .imt-fb-btn div {
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.imt-fb-container.dragging .imt-fb-btn.left,
+.imt-fb-container.dragging .imt-fb-btn.right {
+  border-radius: 50% !important;
+}
+
+.imt-fb-container.dragging .imt-fb-btn.left div,
+.imt-fb-container.dragging .imt-fb-btn.right div {
+  border-radius: 50% !important;
+}
+
+.imt-fb-container.dragging .imt-fb-logo-img {
+  margin: 0 !important;
+}
+
+.imt-fb-container.dragging .imt-float-ball-translated {
+  right: 2px !important;
+  bottom: 2px !important;
+}
+
+@-webkit-keyframes imt-loading-animation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes imt-loading-animation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.imt-fb-icon {
+  color: #666666;
+}
+
+[data-theme="dark"] .imt-fb-icon {
+  color: #b3b3b3;
+}
+
+[data-theme="light"] .imt-fb-icon {
+  color: #666666;
+}
+
+/* 悬浮球设置弹窗样式 */
+.imt-fb-setting-wrapper {
+  border-radius: 12px;
+  box-shadow: 2px 10px 24px 0px rgba(0, 0, 0, 0.06);
+}
+
+.imt-fb-setting-content {
+  padding: 16px;
+  width: 350px;
+  pointer-events: all;
+}
+
+.imt-fb-setting-title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-black-2);
+}
+
+.imt-fb-setting-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.imt-fb-preview-wrapper {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.imt-fb-preview-item {
+  width: 99px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+.imt-fb-preview-item.light {
+  background-color: #f3f5f6;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.imt-fb-preview-item.dark {
+  background-color: #444;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.imt-fb-preview-ball {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.imt-fb-preview-ball.light {
+  background-color: #fff;
+  border-top-left-radius: 36px;
+  border-bottom-left-radius: 36px;
+}
+
+.imt-fb-preview-ball.dark {
+  background-color: #111;
+  border-top-left-radius: 36px;
+  border-bottom-left-radius: 36px;
+}
+
+.imt-fb-preview-ball.full {
+  width: 41px;
+  justify-content: center;
+}
+
+.imt-fb-preview-ball.mini {
+  width: 41px;
+  justify-content: center;
+  transform: translateX(21px);
+}
+
+.imt-fb-preview-ball .imt-fb-preview-logo {
+  flex-shrink: 0;
+}
+
+/* 选项区域 */
+.imt-fb-setting-options {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.imt-fb-setting-option-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.imt-fb-setting-option-label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: var(--text-black-2);
+}
+
+/* Toggle 开关样式 */
+.imt-fb-toggle {
+  width: 30px;
+  height: 18px;
+  background-color: var(--switch-background-color);
+  border-radius: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.imt-fb-toggle.checked {
+  background-color: var(--primary);
+}
+
+.imt-fb-toggle.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.imt-fb-toggle-thumb {
+  width: 14px;
+  height: 14px;
+  background-color: var(--switch-color);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+}
+
+.imt-fb-toggle.checked .imt-fb-toggle-thumb {
+  transform: translateX(12px);
+}
+
+.imt-fb-setting-hide-options {
+  background-color: var(--background-light-green);
+  padding: 8px 20px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.imt-fb-setting-save-btn {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 45px;
+  height: 45px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.imt-fb-setting-save-btn:hover {
+  opacity: 0.9;
+}
+
+.imt-fb-setting-save-btn:active {
+  opacity: 0.8;
+}
+
+.imt-fb-side-panel-hide-content {
+  width: 330px;
+}
+
+.imt-fb-side-panel-hide-desc {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-gray-6);
+}
+
+.imt-fb-side-panel-hide-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.imt-fb-side-panel-hide-cancel-btn,
+.imt-fb-side-panel-hide-confirm-btn {
+  border: none;
+  appearance: none;
+  margin: 0;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.imt-fb-side-panel-hide-cancel-btn {
+  border-radius: 8px;
+  background-color: var(--background-light-green);
+  color: var(--text-black-2);
+}
+
+.imt-fb-side-panel-hide-confirm-btn {
+  margin-top: 0;
+}
+</style><div id="mount" style="display: block;"><div hidden="" id="immersive-translate-popup-overlay" class="immersive-translate-popup-overlay" style="z-index: 2147483647; background-color: rgba(0, 0, 0, 0.5);"><div class="immersive-translate-popup-wrapper" style="position: fixed; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);"></div></div></div></template></div></html>

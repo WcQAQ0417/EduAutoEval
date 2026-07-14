@@ -1,0 +1,22 @@
+[project]
+name = "auto-evaluation"
+version = "1.0.0"
+description = "教务系统自动评教助手 - Python + Playwright"
+authors = [
+    { name = "AutoEval" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "playwright>=1.40.0",
+]
+
+[project.scripts]
+auto-eval = "auto_evaluation:main"
+
+[tool.uv]
+index-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+trusted-hosts = ["pypi.tuna.tsinghua.edu.cn"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
